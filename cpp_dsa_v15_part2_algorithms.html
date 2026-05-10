@@ -1,0 +1,2361 @@
+<!DOCTYPE html>
+<!-- saved from url=(0272)https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&sdl=0&ccb=14-4&oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&oe=6A0250E5&_nc_sid=4ee932 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algorithms Part 2: Sorting, Searching &amp; Graphs</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        background: #0f172a;
+        color: #e2e8f0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.7;
+        padding-bottom: 4rem;
+    }
+    
+    .back-banner {
+        text-align: center;
+        padding: 1rem;
+        background: #1e293b;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #334155;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    
+    .back-banner strong {
+        color: #a78bfa;
+        font-weight: 600;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+    
+    .back-banner strong:hover {
+        color: #c4b5fd;
+    }
+    
+    .container {
+        display: flex;
+        max-width: 1600px;
+        margin: 0 auto;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .toc {
+        position: sticky;
+        top: 4.5rem;
+        height: calc(100vh - 5rem);
+        overflow-y: auto;
+        width: 280px;
+        flex-shrink: 0;
+        background: #1e293b;
+        border-radius: 12px;
+        padding: 1.5rem 1rem;
+        border: 1px solid #334155;
+    }
+    
+    .toc h3 {
+        color: #a78bfa;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #334155;
+    }
+    
+    .toc-group {
+        margin-bottom: 1.25rem;
+    }
+    
+    .toc-group-title {
+        color: #c4b5fd;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+    
+    .toc ul {
+        list-style: none;
+    }
+    
+    .toc li {
+        margin-bottom: 0.25rem;
+    }
+    
+    .toc a {
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 0.875rem;
+        display: block;
+        padding: 0.3rem 0.5rem;
+        border-radius: 4px;
+        transition: all 0.2s;
+    }
+    
+    .toc a:hover {
+        color: #e2e8f0;
+        background: #334155;
+    }
+    
+    .content {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    h1 {
+        color: #a78bfa;
+        font-size: 2.5rem;
+        margin: 1.5rem 0;
+        text-align: center;
+        font-weight: 700;
+        background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .phase-header {
+        color: #c4b5fd;
+        font-size: 1.75rem;
+        margin: 3rem 0 1.5rem;
+        padding: 1rem;
+        background: #1e293b;
+        border-radius: 8px;
+        border-left: 4px solid #a78bfa;
+    }
+    
+    section {
+        background: #1e293b;
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid #334155;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    }
+    
+    h2 {
+        color: #a78bfa;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    .section-num {
+        color: #64748b;
+        font-size: 0.875rem;
+        font-weight: 500;
+        background: #0f172a;
+        padding: 0.25rem 0.6rem;
+        border-radius: 4px;
+    }
+    
+    p {
+        margin-bottom: 1rem;
+        color: #cbd5e1;
+    }
+    
+    .complexity {
+        display: inline-flex;
+        gap: 1rem;
+        margin: 0.75rem 0;
+        flex-wrap: wrap;
+    }
+    
+    .badge {
+        background: #0f172a;
+        color: #a78bfa;
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        font-family: 'Courier New', monospace;
+        border: 1px solid #334155;
+    }
+    
+    pre {
+        background: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 1.25rem;
+        overflow-x: auto;
+        margin: 1rem 0;
+    }
+    
+    code {
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 0.9rem;
+        color: #e2e8f0;
+        line-height: 1.6;
+    }
+    
+    pre code {
+        color: #cbd5e1;
+    }
+    
+    details {
+        margin-top: 1rem;
+        background: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 1rem;
+    }
+    
+    summary {
+        color: #a78bfa;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 0.5rem;
+        user-select: none;
+        transition: color 0.2s;
+    }
+    
+    summary:hover {
+        color: #c4b5fd;
+    }
+    
+    details[open] summary {
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #334155;
+        padding-bottom: 0.75rem;
+    }
+    
+    .trace {
+        background: #0f172a;
+        padding: 1rem;
+        border-radius: 6px;
+        margin: 0.5rem 0;
+        font-family: monospace;
+        color: #94a3b8;
+    }
+    
+    .array-viz {
+        display: flex;
+        gap: 0.5rem;
+        margin: 1rem 0;
+        flex-wrap: wrap;
+    }
+    
+    .array-item {
+        background: #334155;
+        color: #e2e8f0;
+        padding: 0.5rem 0.75rem;
+        border-radius: 4px;
+        min-width: 40px;
+        text-align: center;
+        font-weight: 600;
+    }
+    
+    .highlight {
+        background: #a78bfa;
+        color: #0f172a;
+    }
+    
+    @media (max-width: 1024px) {
+        .container {
+            flex-direction: column;
+        }
+        
+        .toc {
+            position: relative;
+            top: 0;
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 2rem;
+        }
+        
+        section {
+            padding: 1.5rem;
+        }
+    }
+    
+    @media (max-width: 640px) {
+        h1 {
+            font-size: 1.75rem;
+        }
+        
+        h2 {
+            font-size: 1.25rem;
+        }
+        
+        section {
+            padding: 1.25rem;
+        }
+        
+        pre {
+            padding: 1rem;
+            font-size: 0.8rem;
+        }
+    }
+</style>
+</head>
+<body data-new-gr-c-s-check-loaded="14.1290.0" data-gr-ext-installed="">
+    <div class="back-banner">
+        <strong>← Back to Part 1: Foundations</strong>
+    </div>
+    
+    <div class="container">
+        <nav class="toc">
+            <h3>Contents</h3>
+            
+            <div class="toc-group">
+                <div class="toc-group-title">Phase 1: Sorting</div>
+                <ul>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-197">197. Bubble Sort</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-198">198. Bubble Sort Dry Run</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-199">199. Bubble Sort Optimized</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-200">200. Selection Sort</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-201">201. Selection Sort Dry Run</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-202">202. Insertion Sort</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-203">203. Insertion Sort Dry Run</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-204">204. Merge Sort</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-205">205. Merge Sort Divide</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-206">206. Merge Sort Conquer</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-207">207. Merge Sort Dry Run</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-208">208. Quick Sort</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-209">209. Quick Sort Partition</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-210">210. Quick Sort Dry Run</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-211">211. Heap Sort</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-212">212. Heapify Process</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-213">213. Counting Sort</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-214">214. Counting Sort Dry Run</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-215">215. STL sort()</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-216">216. Custom Compare</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-217">217. Sort Stability</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-218">218. Practice: Sort Pick</a></li>
+                </ul>
+            </div>
+            
+            <div class="toc-group">
+                <div class="toc-group-title">Phase 2: Searching</div>
+                <ul>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-219">219. Linear Search</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-220">220. Binary Search</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-221">221. Binary Search Dry Run</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-222">222. BS Edge Cases</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-223">223. Lower Bound</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-224">224. Upper Bound</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-225">225. BS First/Last Occur</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-226">226. BS on Answer</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-227">227. STL Binary Search</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-228">228. STL lower_bound</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-229">229. Ternary Search</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-230">230. Ternary Dry Run</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-231">231. Practice: Search Pick</a></li>
+                </ul>
+            </div>
+            
+            <div class="toc-group">
+                <div class="toc-group-title">Phase 3: Graphs</div>
+                <ul>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-232">232. Graph Intro</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-233">233. Graph Types</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-234">234. Adjacency Matrix</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-235">235. Adjacency List</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-236">236. BFS Algorithm</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-237">237. BFS Dry Run</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-238">238. BFS Code</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-239">239. DFS Algorithm</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-240">240. DFS Dry Run</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-241">241. DFS Code Recursive</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-242">242. DFS Code Iterative</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-243">243. Connected Components</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-244">244. Cycle Detection DFS</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-245">245. Bipartite Check</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-246">246. Dijkstra Intro</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-247">247. Dijkstra Dry Run</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-248">248. Dijkstra Code</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-249">249. MST Intro</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-250">250. Kruskal Algorithm</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-251">251. DSU Find Union</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-252">252. Kruskal Dry Run</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-253">253. Kruskal Code</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-254">254. Prim Algorithm</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-255">255. Topological Sort</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-256">256. TopoSort DFS</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-257">257. Kahn's Algorithm</a></li>
+                    <li><a href="https://cdn.fbsbx.com/v/t65.102178-21/696757783_1552417416496194_7455254421921412449_n.jpg/cpp_dsa_v15_part2_algorithms.html?_nc_ht=cdn.fbsbx.com&amp;_nc_ohc=R2ZI7KpN2bQQ7kNvwEzR5m2&amp;sdl=0&amp;ccb=14-4&amp;oh=00_Af5k63_v1Qa9nse21LWbBq0CrskF7dxTH-7uzP3cwMiUCg&amp;oe=6A0250E5&amp;_nc_sid=4ee932#slide-258">258. TopoSort Dry Run</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <h1>Algorithms Part 2: Sorting, Searching &amp; Graphs</h1>
+            
+            <div class="phase-header">PHASE 1: SORTING ALGORITHMS</div>
+            
+            <section id="slide-197">
+                <h2><span class="section-num">197</span>Bubble Sort</h2>
+                <p>Bubble Sort repeatedly steps through the list, compares adjacent elements and swaps them if they are in wrong order. The pass through the list is repeated until no swaps are needed. Larger elements bubble to the end with each pass. This is an in-place algorithm but inefficient for large datasets.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(n²)</span>
+                    <span class="badge">Space: O(1)</span>
+                    <span class="badge">Stable: Yes</span>
+                </div>
+                <pre><code>void bubbleSort(int arr[], int n) {
+    for (int i = 0; i &lt; n-1; i++) {
+        for (int j = 0; j &lt; n-i-1; j++) {
+            if (arr[j] &gt; arr[j+1]) {
+                swap(arr[j], arr[j+1]);
+            }
+        }
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-198">
+                <h2><span class="section-num">198</span>Bubble Sort Dry Run</h2>
+                <p>Let's trace Bubble Sort on array [5,1,4,2,8]. After each pass, the largest unsorted element moves to its correct position at the end. We compare adjacent pairs and swap if left is greater than right. Pass 1 handles all elements, Pass 2 ignores last, and so on.</p>
+                <div class="array-viz">
+                    <div class="array-item">5</div>
+                    <div class="array-item">1</div>
+                    <div class="array-item">4</div>
+                    <div class="array-item">2</div>
+                    <div class="array-item">8</div>
+                </div>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <div class="trace">Pass 1: [1,4,2,5,8] - 8 bubbled to end<br>
+Pass 2: [1,2,4,5,8] - 5 in place<br>
+Pass 3: [1,2,4,5,8] - No swaps<br>
+Pass 4: [1,2,4,5,8] - Sorted<br>
+Total swaps: 5</div>
+                </details>
+            </section>
+
+            <section id="slide-199">
+                <h2><span class="section-num">199</span>Bubble Sort Optimized</h2>
+                <p>The optimized version adds a flag to detect if any swap occurred in a pass. If no swaps happen, the array is already sorted and we can terminate early. This improves best case to O(n) when the array is already sorted. The optimization checks after each complete pass through the unsorted portion.</p>
+                <div class="complexity">
+                    <span class="badge">Best: O(n)</span>
+                    <span class="badge">Avg/Worst: O(n²)</span>
+                </div>
+                <pre><code>void bubbleSortOpt(int arr[], int n) {
+    bool swapped;
+    for (int i = 0; i &lt; n-1; i++) {
+        swapped = false;
+        for (int j = 0; j &lt; n-i-1; j++) {
+            if (arr[j] &gt; arr[j+1]) {
+                swap(arr[j], arr[j+1]);
+                swapped = true;
+            }
+        }
+        if (!swapped) break;
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-200">
+                <h2><span class="section-num">200</span>Selection Sort</h2>
+                <p>Selection Sort divides the array into sorted and unsorted regions. It repeatedly finds the minimum element from the unsorted portion and swaps it with the first unsorted element. This algorithm performs well on small lists and when memory writes are costly. It makes only O(n) swaps compared to O(n²) for Bubble Sort.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(n²)</span>
+                    <span class="badge">Space: O(1)</span>
+                    <span class="badge">Stable: No</span>
+                </div>
+                <pre><code>void selectionSort(int arr[], int n) {
+    for (int i = 0; i &lt; n-1; i++) {
+        int minIdx = i;
+        for (int j = i+1; j &lt; n; j++) {
+            if (arr[j] &lt; arr[minIdx])
+                minIdx = j;
+        }
+        swap(arr[minIdx], arr[i]);
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-201">
+                <h2><span class="section-num">201</span>Selection Sort Dry Run</h2>
+                <p>Tracing Selection Sort on [5,1,4,2,8]. In each iteration i, we find the minimum in arr[i...n-1] and swap with arr[i]. The sorted portion grows from left to right. After k iterations, the first k elements are in their final sorted positions. Total of n-1 passes required.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <div class="trace">Initial: [5,1,4,2,8]<br>
+i=0, min=1: [1,5,4,2,8]<br>
+i=1, min=2: [1,2,4,5,8]<br>
+i=2, min=4: [1,2,4,5,8]<br>
+i=3, min=5: [1,2,4,5,8]<br>
+Final: [1,2,4,5,8] - 3 swaps</div>
+                </details>
+            </section>
+
+            <section id="slide-202">
+                <h2><span class="section-num">202</span>Insertion Sort</h2>
+                <p>Insertion Sort builds the final sorted array one element at a time. It iterates through the input, removing one element and finding its correct position in the sorted portion by shifting larger elements right. It's efficient for small datasets and nearly sorted arrays. The algorithm is adaptive and stable, working similarly to how we sort playing cards.</p>
+                <div class="complexity">
+                    <span class="badge">Best: O(n)</span>
+                    <span class="badge">Avg/Worst: O(n²)</span>
+                    <span class="badge">Stable: Yes</span>
+                </div>
+                <pre><code>void insertionSort(int arr[], int n) {
+    for (int i = 1; i &lt; n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j &gt;= 0 &amp;&amp; arr[j] &gt; key) {
+            arr[j+1] = arr[j];
+            j--;
+        }
+        arr[j+1] = key;
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-203">
+                <h2><span class="section-num">203</span>Insertion Sort Dry Run</h2>
+                <p>Running Insertion Sort on [5,1,4,2,8]. We start with first element considered sorted. For each subsequent element, we insert it into the correct position in the sorted left portion by shifting elements. This is highly efficient when the array is already nearly sorted with only few inversions.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <div class="trace">Start: [5] | 1,4,2,8<br>
+Insert 1: [1,5] | 4,2,8<br>
+Insert 4: [1,4,5] | 2,8<br>
+Insert 2: [1,2,4,5] | 8<br>
+Insert 8: [1,2,4,5,8]<br>
+Total shifts: 5</div>
+                </details>
+            </section>
+
+            <section id="slide-204">
+                <h2><span class="section-num">204</span>Merge Sort</h2>
+                <p>Merge Sort is a divide-and-conquer algorithm that recursively splits the array into halves until single elements remain, then merges them back in sorted order. It guarantees O(n log n) time in all cases, making it reliable for large datasets. The merge operation is the key step where two sorted subarrays are combined into one sorted array.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(n log n)</span>
+                    <span class="badge">Space: O(n)</span>
+                    <span class="badge">Stable: Yes</span>
+                </div>
+                <pre><code>void mergeSort(int arr[], int l, int r) {
+    if (l &lt; r) {
+        int m = l + (r-l)/2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m+1, r);
+        merge(arr, l, m, r);
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-205">
+                <h2><span class="section-num">205</span>Merge Sort Divide</h2>
+                <p>The divide step recursively breaks the problem into smaller subproblems. We find the middle point and recursively sort the left and right halves. This creates a recursion tree of depth log n. Base case occurs when subarray has 0 or 1 elements which are trivially sorted. The actual sorting happens during the merge phase, not the divide.</p>
+                <pre><code>// Divide phase for [5,1,4,2,8]
+Level 0: [5,1,4,2,8]
+Level 1: [5,1,4] | [2,8]
+Level 2: [5] | [1,4] | [2] | [8]
+Level 3: [5] | [1] | [4] | [2] | [8]
+// Now merge back up</code></pre>
+            </section>
+
+            <section id="slide-206">
+                <h2><span class="section-num">206</span>Merge Sort Conquer</h2>
+                <p>The merge function combines two sorted subarrays into a single sorted array. We use two pointers to track positions in each subarray and a temporary array to store the merged result. After one subarray is exhausted, we copy remaining elements from the other. Finally we copy the temp array back to the original array.</p>
+                <pre><code>void merge(int arr[], int l, int m, int r) {
+    int n1 = m - l + 1, n2 = r - m;
+    int L[n1], R[n2];
+    for(int i = 0; i &lt; n1; i++) L[i] = arr[l+i];
+    for(int j = 0; j &lt; n2; j++) R[j] = arr[m+1+j];
+    
+    int i = 0, j = 0, k = l;
+    while(i &lt; n1 &amp;&amp; j &lt; n2)
+        arr[k++] = (L[i] &lt;= R[j]) ? L[i++] : R[j++];
+    while(i &lt; n1) arr[k++] = L[i++];
+    while(j &lt; n2) arr[k++] = R[j++];
+}</code></pre>
+            </section>
+
+            <section id="slide-207">
+                <h2><span class="section-num">207</span>Merge Sort Dry Run</h2>
+                <p>Merging [5,1,4,2,8]. First divide to single elements, then merge up. At each merge level, we carefully combine sorted pairs. The key insight is that merging two sorted arrays of size k takes O(k) time. The recursion tree has log n levels, giving O(n log n) total complexity.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <div class="trace">Split: [5,1,4] [2,8]<br>
+Split: [5] [1,4] [2,8]<br>
+Merge [1,4]: [1,4]<br>
+Merge [5,1,4]: [1,4,5]<br>
+Merge [2,8]: [2,8]<br>
+Merge all: [1,2,4,5,8]</div>
+                </details>
+            </section>
+
+            <section id="slide-208">
+                <h2><span class="section-num">208</span>Quick Sort</h2>
+                <p>Quick Sort picks a pivot element and partitions the array so elements less than pivot come before it, and greater elements after. It then recursively sorts the subarrays. Average case is O(n log n) but worst case O(n²) occurs on already sorted data with poor pivot choice. It's in-place but not stable. Randomized pivot selection helps avoid worst case.</p>
+                <div class="complexity">
+                    <span class="badge">Best/Avg: O(n log n)</span>
+                    <span class="badge">Worst: O(n²)</span>
+                    <span class="badge">Space: O(log n)</span>
+                </div>
+                <pre><code>void quickSort(int arr[], int low, int high) {
+    if (low &lt; high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-209">
+                <h2><span class="section-num">209</span>Quick Sort Partition</h2>
+                <p>Lomuto partition scheme uses last element as pivot. We maintain index i for elements smaller than pivot. For each element, if it's smaller than pivot, increment i and swap with current position. Finally swap pivot to position i+1. This ensures all elements left of pivot are smaller and right are larger. Hoare's partition is another efficient variant.</p>
+                <pre><code>int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j &lt; high; j++) {
+        if (arr[j] &lt; pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i+1], arr[high]);
+    return i + 1;
+}</code></pre>
+            </section>
+
+            <section id="slide-210">
+                <h2><span class="section-num">210</span>Quick Sort Dry Run</h2>
+                <p>Quick Sort on [5,1,4,2,8] with last element as pivot. Each partition places one element in its final sorted position. The choice of pivot greatly affects performance - ideal pivot splits array evenly. For [5,1,4,2,8], pivot 8 is already largest, causing worst-case unbalanced partition in first step.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <div class="trace">pivot=8: [5,1,4,2,8] → [5,1,4,2,8] pi=4<br>
+Left: pivot=2: [1,2,4,5] → [1,2,4,5] pi=1<br>
+Left: [1] | Right: [4,5]<br>
+pivot=5: [4,5] → [4,5] pi=1<br>
+Result: [1,2,4,5,8]</div>
+                </details>
+            </section>
+
+            <section id="slide-211">
+                <h2><span class="section-num">211</span>Heap Sort</h2>
+                <p>Heap Sort converts the array to a max-heap, then repeatedly extracts the maximum element by swapping root with last element and heapifying the reduced heap. A heap is a complete binary tree where parent is larger than children. Build-heap takes O(n) time, and each of n extractions takes O(log n), giving O(n log n) total. It's in-place but not stable.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(n log n)</span>
+                    <span class="badge">Space: O(1)</span>
+                    <span class="badge">Stable: No</span>
+                </div>
+                <pre><code>void heapSort(int arr[], int n) {
+    for (int i = n/2-1; i &gt;= 0; i--)
+        heapify(arr, n, i);
+    for (int i = n-1; i &gt; 0; i--) {
+        swap(arr[0], arr[i]);
+        heapify(arr, i, 0);
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-212">
+                <h2><span class="section-num">212</span>Heapify Process</h2>
+                <p>Heapify maintains the max-heap property for a subtree rooted at index i. It assumes left and right subtrees are already heaps. We compare the node with its children and swap with the largest child if needed, then recursively heapify the affected subtree. This sift-down operation takes O(log n) time where n is the size of the heap.</p>
+                <pre><code>void heapify(int arr[], int n, int i) {
+    int largest = i;
+    int l = 2*i + 1;
+    int r = 2*i + 2;
+    
+    if (l &lt; n &amp;&amp; arr[l] &gt; arr[largest])
+        largest = l;
+    if (r &lt; n &amp;&amp; arr[r] &gt; arr[largest])
+        largest = r;
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-213">
+                <h2><span class="section-num">213</span>Counting Sort</h2>
+                <p>Counting Sort is a non-comparison sort for integers with small range k. It counts occurrences of each value, computes prefix sums for positions, then places elements in output array. It achieves O(n+k) time which is linear when k=O(n). The algorithm is stable and works well for sorting objects by integer keys like grades or ages.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(n+k)</span>
+                    <span class="badge">Space: O(n+k)</span>
+                    <span class="badge">Stable: Yes</span>
+                </div>
+                <pre><code>void countingSort(int arr[], int n) {
+    int maxVal = *max_element(arr, arr+n);
+    int count[maxVal+1] = {0};
+    
+    for(int i = 0; i &lt; n; i++)
+        count[arr[i]]++;
+    for(int i = 1; i &lt;= maxVal; i++)
+        count[i] += count[i-1];
+        
+    int output[n];
+    for(int i = n-1; i &gt;= 0; i--) {
+        output[count[arr[i]]-1] = arr[i];
+        count[arr[i]]--;
+    }
+    for(int i = 0; i &lt; n; i++)
+        arr[i] = output[i];
+}</code></pre>
+            </section>
+
+            <section id="slide-214">
+                <h2><span class="section-num">214</span>Counting Sort Dry Run</h2>
+                <p>For array [5,1,4,2,8] with max=8, we create count array of size 9. First pass counts frequencies. Second pass computes cumulative sums giving ending positions. Third pass places elements from right to left to maintain stability. This works because for value x, count[x]-1 gives last valid index.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <div class="trace">Count: [0,1,1,0,1,1,0,0,1]<br>
+Cumsum: [0,1,2,2,3,4,4,4,5]<br>
+Place 8: output[4]=8<br>
+Place 2: output[1]=2<br>
+Place 4: output[2]=4<br>
+Place 1: output[0]=1<br>
+Place 5: output[3]=5<br>
+Result: [1,2,4,5,8]</div>
+                </details>
+            </section>
+
+            <section id="slide-215">
+                <h2><span class="section-num">215</span>STL sort()</h2>
+                <p>C++ STL sort implements Introsort - a hybrid of Quick Sort, Heap Sort, and Insertion Sort. It starts with Quick Sort, switches to Heap Sort when recursion depth exceeds log n to avoid worst case O(n²), and uses Insertion Sort for small subarrays. This guarantees O(n log n) worst case. Default uses operator&lt; for comparison.</p>
+                <pre><code>#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+vector&lt;int&gt; v = {5,1,4,2,8};
+sort(v.begin(), v.end()); // [1,2,4,5,8]
+sort(v.rbegin(), v.rend()); // [8,5,4,2,1]
+
+// For array
+int arr[] = {5,1,4,2,8};
+sort(arr, arr + 5);</code></pre>
+            </section>
+
+            <section id="slide-216">
+                <h2><span class="section-num">216</span>Custom Compare</h2>
+                <p>STL sort accepts a third parameter for custom comparison logic. This can be a function pointer, lambda, or functor returning true if first argument should come before second. Common uses include sorting pairs by second element, descending order, or custom objects. The comparator must define a strict weak ordering to avoid undefined behavior.</p>
+                <pre><code>vector&lt;pair&lt;int,int&gt;&gt; v = {{5,1},{1,4},{4,2}};
+
+// Sort by second element
+sort(v.begin(), v.end(), [](auto &amp;a, auto &amp;b) {
+    return a.second &lt; b.second;
+}); // [{5,1},{4,2},{1,4}]
+
+// Sort descending
+sort(v.begin(), v.end(), greater&lt;int&gt;());</code></pre>
+            </section>
+
+            <section id="slide-217">
+                <h2><span class="section-num">217</span>Sort Stability</h2>
+                <p>A stable sort preserves the relative order of equal elements. Bubble, Insertion, Merge, and Counting sorts are stable. Quick, Heap, and Selection sorts are not stable. For objects with multiple keys, stable sort allows sorting by one key then another. STL provides stable_sort() which is stable but uses O(n) extra space and may be slower than sort().</p>
+                <pre><code>vector&lt;pair&lt;int,string&gt;&gt; v = {{2,"a"},{1,"b"},{2,"c"}};
+
+// Unstable sort may give: [{1,"b"},{2,"c"},{2,"a"}]
+sort(v.begin(), v.end());
+
+// Stable sort gives: [{1,"b"},{2,"a"},{2,"c"}]
+stable_sort(v.begin(), v.end());</code></pre>
+            </section>
+
+            <section id="slide-218">
+                <h2><span class="section-num">218</span>Practice: Sort Pick</h2>
+                <p>You need to sort 1 million integers with values from 0 to 100. Which algorithm is most efficient? Consider time complexity, space constraints, and data characteristics. Small range relative to n makes non-comparison sorts attractive. Memory usage and stability may also influence the choice depending on requirements.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: Counting Sort</strong></p>
+                    <p>With n=1,000,000 and k=101, Counting Sort runs in O(n+k) = O(1,000,101) time and O(k) space. This is linear time and very fast. Comparison sorts like Quick/Merge would take O(n log n) ≈ 20 million operations. Counting Sort is stable and perfect for small integer ranges.</p>
+                </details>
+            </section>
+
+            <div class="phase-header">PHASE 2: SEARCHING ALGORITHMS</div>
+
+            <section id="slide-219">
+                <h2><span class="section-num">219</span>Linear Search</h2>
+                <p>Linear Search sequentially checks each element until the target is found or the end is reached. It works on unsorted and sorted data with no preprocessing required. Best case O(1) when element is first, worst case O(n) when element is last or absent. It's simple but inefficient for large datasets. Use when data is unsorted and small, or searched infrequently.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(n)</span>
+                    <span class="badge">Space: O(1)</span>
+                </div>
+                <pre><code>int linearSearch(int arr[], int n, int x) {
+    for (int i = 0; i &lt; n; i++)
+        if (arr[i] == x)
+            return i;
+    return -1;
+}</code></pre>
+            </section>
+
+            <section id="slide-220">
+                <h2><span class="section-num">220</span>Binary Search</h2>
+                <p>Binary Search finds a target in a sorted array by repeatedly dividing the search interval in half. Compare target with middle element: if equal return index, if smaller search left half, if larger search right half. This eliminates half the remaining elements each iteration. Requires sorted data but gives logarithmic search time. Much faster than linear search for large n.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(log n)</span>
+                    <span class="badge">Space: O(1)</span>
+                    <span class="badge">Req: Sorted</span>
+                </div>
+                <pre><code>int binarySearch(int arr[], int l, int r, int x) {
+    while (l &lt;= r) {
+        int m = l + (r - l) / 2;
+        if (arr[m] == x) return m;
+        if (arr[m] &lt; x) l = m + 1;
+        else r = m - 1;
+    }
+    return -1;
+}</code></pre>
+            </section>
+
+            <section id="slide-221">
+                <h2><span class="section-num">221</span>Binary Search Dry Run</h2>
+                <p>Search for 4 in sorted [1,2,4,5,8]. We maintain left and right bounds. Calculate mid = l+(r-l)/2 to avoid overflow. Compare arr[mid] with target to decide which half to keep. Each step halves the search space. For n elements, max iterations is ceil(log₂ n). Here n=5 so max 3 iterations.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <div class="trace">l=0,r=4: mid=2, arr[2]=4 == 4 ✓ Found<br>
+Iterations: 1<br>
+Comparisons: 1 vs Linear's 3</div>
+                </details>
+            </section>
+
+            <section id="slide-222">
+                <h2><span class="section-num">222</span>BS Edge Cases</h2>
+                <p>Common Binary Search pitfalls: integer overflow in (l+r)/2 - use l+(r-l)/2 instead. Infinite loops from incorrect boundary updates - ensure l=m+1 or r=m-1. Off-by-one errors in loop condition - use l&lt;=r for inclusive bounds. Empty array check: return -1 if n==0. Target not found handling. Duplicates require lower/upper bound variants to find first/last occurrence.</p>
+                <pre><code>// Safe mid calculation
+int mid = left + (right - left) / 2;
+
+// Inclusive bounds
+while (left &lt;= right) {
+    // ...
+    if (arr[mid] &lt; target) left = mid + 1;
+    else right = mid - 1;
+}</code></pre>
+            </section>
+
+            <section id="slide-223">
+                <h2><span class="section-num">223</span>Lower Bound</h2>
+                <p>Lower bound finds the first element not less than target - the leftmost insertion point to maintain sorted order. If all elements are smaller, returns n. If target exists, returns index of first occurrence. Implementation modifies binary search: when arr[mid]&gt;=target, record mid and search left. This is useful for finding first occurrence of duplicates or insertion points.</p>
+                <pre><code>int lower_bound(int arr[], int n, int x) {
+    int l = 0, r = n;
+    while (l &lt; r) {
+        int m = l + (r - l) / 2;
+        if (arr[m] &lt; x) l = m + 1;
+        else r = m;
+    }
+    return l;
+}
+// [1,2,4,4,5,8], x=4 → returns 2</code></pre>
+            </section>
+
+            <section id="slide-224">
+                <h2><span class="section-num">224</span>Upper Bound</h2>
+                <p>Upper bound finds the first element greater than target - the rightmost insertion point. If all elements are less or equal, returns n. If target exists, returns index after last occurrence. The only difference from lower_bound is using arr[mid]&lt;=x instead of arr[mid]<x. range="" [lower_bound,="" upper_bound)="" contains="" all="" elements="" equal="" to="" target.<="" p="">
+                </x.></p><pre><code>int upper_bound(int arr[], int n, int x) {
+    int l = 0, r = n;
+    while (l &lt; r) {
+        int m = l + (r - l) / 2;
+        if (arr[m] &lt;= x) l = m + 1;
+        else r = m;
+    }
+    return l;
+}
+// [1,2,4,4,5,8], x=4 → returns 4</code></pre>
+            </section>
+
+            <section id="slide-225">
+                <h2><span class="section-num">225</span>BS First/Last Occur</h2>
+                <p>To find first or last occurrence in sorted array with duplicates, modify binary search. For first occurrence: when found, continue searching left half by setting r=mid-1. For last: search right half with l=mid+1. Store the answer whenever target is found. Alternative: use lower_bound for first, upper_bound-1 for last after checking if target exists.</p>
+                <pre><code>int firstOccur(int arr[], int n, int x) {
+    int l = 0, r = n-1, res = -1;
+    while (l &lt;= r) {
+        int m = l + (r-l)/2;
+        if (arr[m] == x) {
+            res = m; r = m-1; // search left
+        } else if (arr[m] &lt; x) l = m+1;
+        else r = m-1;
+    }
+    return res;
+}</code></pre>
+            </section>
+
+            <section id="slide-226">
+                <h2><span class="section-num">226</span>BS on Answer</h2>
+                <p>Binary Search on Answer applies BS to search space of possible answers, not array indices. If we can verify if a value x is valid in O(f(n)) and the valid range has monotonic property, we can BS the answer in O(f(n) log(max-min)). Classic problems: minimum capacity to ship packages, smallest divisor, square root, or allocation problems. Key is defining the check function.</p>
+                <pre><code>// Find min x such that check(x) is true
+int lo = 1, hi = 1e9, ans = -1;
+while(lo &lt;= hi) {
+    int mid = lo + (hi-lo)/2;
+    if(check(mid)) {
+        ans = mid;
+        hi = mid-1; // try smaller
+    } else {
+        lo = mid+1;
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-227">
+                <h2><span class="section-num">227</span>STL Binary Search</h2>
+                <p>STL provides binary_search() returning bool indicating if element exists. It requires sorted range and uses operator&lt;. For index, use lower_bound or upper_bound. All operate in O(log n) time. These functions work on any random access iterators like vector, deque, or plain arrays. For containers like set/map, use their member functions which are also O(log n).</p>
+                <pre><code>#include &lt;algorithm&gt;
+vector&lt;int&gt; v = {1,2,4,5,8};
+
+bool exists = binary_search(v.begin(), v.end(), 4); // true
+
+auto it = lower_bound(v.begin(), v.end(), 4); 
+int idx = it - v.begin(); // 2
+
+auto it2 = upper_bound(v.begin(), v.end(), 4);
+int count = it2 - lower_bound(v.begin(), v.end(), 4); // 1</code></pre>
+            </section>
+
+            <section id="slide-228">
+                <h2><span class="section-num">228</span>STL lower_bound</h2>
+                <p>STL lower_bound returns iterator to first element not less than val, or end() if all elements are less. For arrays: lower_bound(arr, arr+n, x) - arr gives index. Upper_bound returns iterator to first element greater than val. equal_range returns pair of both. These functions enable efficient range queries, counting occurrences, and finding insertion points in sorted containers.</p>
+                <pre><code>int arr[] = {1,2,4,4,5,8};
+int n = 6;
+
+int lb = lower_bound(arr, arr+n, 4) - arr; // 2
+int ub = upper_bound(arr, arr+n, 4) - arr; // 4
+int cnt = ub - lb; // 2 occurrences
+
+auto range = equal_range(arr, arr+n, 4);
+// range.first = lb, range.second = ub</code></pre>
+            </section>
+
+            <section id="slide-229">
+                <h2><span class="section-num">229</span>Ternary Search</h2>
+                <p>Ternary Search finds maximum or minimum of a unimodal function - one that increases then decreases or vice versa. Divide range into three parts using two mids: m1=l+(r-l)/3, m2=r-(r-l)/3. Compare f(m1) and f(m2) to eliminate one third of search space. Each iteration reduces range by 1/3 vs 1/2 in binary search. Useful for optimization problems on continuous domains.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(log₃ n)</span>
+                    <span class="badge">Req: Unimodal</span>
+                </div>
+                <pre><code>double ternarySearch(double l, double r) {
+    while (r - l &gt; 1e-9) {
+        double m1 = l + (r-l)/3;
+        double m2 = r - (r-l)/3;
+        if (f(m1) &lt; f(m2))
+            l = m1;
+        else
+            r = m2;
+    }
+    return f(l);
+}</code></pre>
+            </section>
+
+            <section id="slide-230">
+                <h2><span class="section-num">230</span>Ternary Dry Run</h2>
+                <p>Find max of unimodal array [1,2,4,5,8] which is increasing, so unimodal with peak at end. In practice ternary search is for functions not discrete arrays. For f(x)=-(x-3)²+9 on [0,6], max at x=3. We narrow down: m1=2 gives f=8, m2=4 gives f=8, eliminate based on comparison. Continue until interval is tiny.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <div class="trace">Range [0,6]: m1=2,f=8; m2=4,f=8 → shrink<br>
+Range [2,4]: m1=2.67,f=8.89; m2=3.33,f=8.89<br>
+Range [2.67,3.33]: converges to 3<br>
+Max: f(3) = 9</div>
+                </details>
+            </section>
+
+            <section id="slide-231">
+                <h2><span class="section-num">231</span>Practice: Search Pick</h2>
+                <p>You have a sorted array of 1 billion elements. You need to check if a value exists. Compare linear search vs binary search. Consider number of operations, cache performance, and practical implications. Also consider if the data structure allows random access required for binary search.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: Binary Search</strong></p>
+                    <p>Linear search: worst case 1,000,000,000 comparisons. Binary search: log₂(10⁹) ≈ 30 comparisons. Binary search is ~33 million times faster. For 1 billion elements, binary search takes microseconds while linear takes seconds. Binary search requires random access and sorted data, which is satisfied here.</p>
+                </details>
+            </section>
+
+            <div class="phase-header">PHASE 3: GRAPH ALGORITHMS</div>
+
+            <section id="slide-232">
+                <h2><span class="section-num">232</span>Graph Intro</h2>
+                <p>A graph G=(V,E) consists of vertices V and edges E connecting pairs of vertices. Graphs model relationships: social networks, road maps, dependencies. Key terms: vertex/node, edge, degree, path, cycle, connected component. Graphs can be directed or undirected, weighted or unweighted, cyclic or acyclic. Understanding graph properties determines which algorithms to apply.</p>
+                <div class="complexity">
+                    <span class="badge">V: vertices</span>
+                    <span class="badge">E: edges</span>
+                </div>
+                <pre><code>// Undirected graph example
+Vertices: {0,1,2,3,4}
+Edges: {(0,1),(0,2),(1,3),(2,3),(3,4)}
+
+Degree of 0: 2
+Path 0→4: 0-1-3-4 or 0-2-3-4
+Cycle: 0-1-3-2-0</code></pre>
+            </section>
+
+            <section id="slide-233">
+                <h2><span class="section-num">233</span>Graph Types</h2>
+                <p>Directed graphs have ordered edges (u→v), like Twitter follows. Undirected have unordered edges (u-v), like Facebook friends. Weighted graphs assign values to edges, like road distances. DAG is Directed Acyclic Graph with no cycles, used for scheduling. Complete graph has edge between every pair. Bipartite graph vertices split into two sets with edges only between sets.</p>
+                <pre><code>// Directed: edge 0→1 exists, 1→0 may not
+// Undirected: edge 0-1 means both directions
+// Weighted: 0-1 with weight 5
+// DAG: Task dependencies A→B→C, no cycles
+// Bipartite: Students &amp; Courses, no student-student edges</code></pre>
+            </section>
+
+            <section id="slide-234">
+                <h2><span class="section-num">234</span>Adjacency Matrix</h2>
+                <p>Adjacency matrix uses V×V 2D array where mat[i][j]=1 if edge i→j exists, 0 otherwise. For weighted graphs, store weight instead of 1. Space O(V²) which is wasteful for sparse graphs. Edge lookup O(1) but iterating neighbors O(V). Good for dense graphs or when edge queries are frequent. For undirected graphs, matrix is symmetric.</p>
+                <div class="complexity">
+                    <span class="badge">Space: O(V²)</span>
+                    <span class="badge">Edge Query: O(1)</span>
+                </div>
+                <pre><code>int adj[5][5] = {
+    {0,1,1,0,0}, // 0: edges to 1,2
+    {1,0,0,1,0}, // 1: edges to 0,3
+    {1,0,0,1,0}, // 2: edges to 0,3
+    {0,1,1,0,1}, // 3: edges to 1,2,4
+    {0,0,0,1,0}  // 4: edge to 3
+};</code></pre>
+            </section>
+
+            <section id="slide-235">
+                <h2><span class="section-num">235</span>Adjacency List</h2>
+                <p>Adjacency list uses array of lists where adj[i] contains all neighbors of vertex i. Space O(V+E) efficient for sparse graphs. Iterating neighbors O(degree) which is optimal. Edge lookup O(degree) worst case. Most common representation for graph algorithms. For weighted graphs, store pairs {neighbor, weight}. For undirected, add both u→v and v→u.</p>
+                <div class="complexity">
+                    <span class="badge">Space: O(V+E)</span>
+                    <span class="badge">Iterate: O(deg)</span>
+                </div>
+                <pre><code>vector&lt;int&gt; adj[5];
+adj[0] = {1,2};
+adj[1] = {0,3};
+adj[2] = {0,3};
+adj[3] = {1,2,4};
+adj[4] = {3};
+
+// Weighted
+vector&lt;pair&lt;int,int&gt;&gt; adjw[5];
+adjw[0].push_back({1,5}); // 0→1 weight 5</code></pre>
+            </section>
+
+            <section id="slide-236">
+                <h2><span class="section-num">236</span>BFS Algorithm</h2>
+                <p>Breadth-First Search explores graph level by level from a source. Uses a queue to visit all neighbors before moving to next level. BFS finds shortest path in unweighted graphs and traverses in radius order. It marks visited nodes to avoid cycles. Time O(V+E) as each vertex and edge processed once. Space O(V) for queue and visited array.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(V+E)</span>
+                    <span class="badge">Space: O(V)</span>
+                </div>
+                <pre><code>void bfs(int start, vector&lt;int&gt; adj[], int V) {
+    vector&lt;bool&gt; vis(V, false);
+    queue&lt;int&gt; q;
+    q.push(start);
+    vis[start] = true;
+    
+    while(!q.empty()) {
+        int u = q.front(); q.pop();
+        // process u
+        for(int v : adj[u]) {
+            if(!vis[v]) {
+                vis[v] = true;
+                q.push(v);
+            }
+        }
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-237">
+                <h2><span class="section-num">237</span>BFS Dry Run</h2>
+                <p>Run BFS from node 0 on graph: 0-1, 0-2, 1-3, 2-3, 3-4. BFS explores nodes in order of distance from source. Level 0: {0}, Level 1: {1,2}, Level 2: {3}, Level 3: {4}. Queue evolves: [0] → [1,2] → [2,3] → [3] → [4] → []. Each node enqueued once when first discovered. This gives shortest path tree.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <div class="trace">Visit order: 0,1,2,3,4<br>
+Distances: d[0]=0,d[1]=1,d[2]=1,d[3]=2,d[4]=3<br>
+Queue states:<br>
+[0] → [1,2] → [2,3] → [3,4] → [4] → []</div>
+                </details>
+            </section>
+
+            <section id="slide-238">
+                <h2><span class="section-num">238</span>BFS Code</h2>
+                <p>Complete BFS implementation with distance tracking. We use dist array initialized to -1 for unvisited. When we discover a node v from u, set dist[v]=dist[u]+1. This gives shortest path length in unweighted graphs. We can also track parent array to reconstruct actual paths. The queue ensures FIFO processing for level-order traversal.</p>
+                <pre><code>vector&lt;int&gt; bfs(int s, vector&lt;int&gt; adj[], int n) {
+    vector&lt;int&gt; dist(n, -1);
+    queue&lt;int&gt; q;
+    dist[s] = 0;
+    q.push(s);
+    
+    while(!q.empty()) {
+        int u = q.front(); q.pop();
+        for(int v : adj[u]) {
+            if(dist[v] == -1) {
+                dist[v] = dist[u] + 1;
+                q.push(v);
+            }
+        }
+    }
+    return dist;
+}</code></pre>
+            </section>
+
+            <section id="slide-239">
+                <h2><span class="section-num">239</span>DFS Algorithm</h2>
+                <p>Depth-First Search explores as far as possible along each branch before backtracking. Uses recursion or explicit stack. DFS discovers graph structure, finds paths, detects cycles, and computes topological order. It marks nodes gray when discovered and black when finished. Time O(V+E) same as BFS. Space O(V) for recursion stack in worst case of linear graph.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(V+E)</span>
+                    <span class="badge">Space: O(V)</span>
+                </div>
+                <pre><code>void dfs(int u, vector&lt;int&gt; adj[], vector&lt;bool&gt;&amp; vis) {
+    vis[u] = true;
+    // process u on entry
+    for(int v : adj[u]) {
+        if(!vis[v])
+            dfs(v, adj, vis);
+    }
+    // process u on exit
+}</code></pre>
+            </section>
+
+            <section id="slide-240">
+                <h2><span class="section-num">240</span>DFS Dry Run</h2>
+                <p>Run DFS from 0 on same graph: 0-1, 0-2, 1-3, 2-3, 3-4. DFS goes deep: 0→1→3→4, then backtracks to 2. Visit order depends on adjacency list order. Recursion stack traces path. DFS tree edges form spanning tree. Back edges indicate cycles in undirected graphs. Discovery and finish times useful for many algorithms.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <div class="trace">Call sequence: dfs(0)→dfs(1)→dfs(3)→dfs(4)→dfs(2)<br>
+Visit order: 0,1,3,4,2<br>
+Tree edges: 0-1, 1-3, 3-4, 0-2<br>
+Back edge: 2-3 (to visited ancestor)</div>
+                </details>
+            </section>
+
+            <section id="slide-241">
+                <h2><span class="section-num">241</span>DFS Code Recursive</h2>
+                <p>Recursive DFS is elegant and uses implicit call stack. We track visited array to avoid infinite loops. Entry processing happens before recursive calls, exit processing after all children explored. This enables computing preorder, postorder, and parent relationships. For large graphs, recursion may cause stack overflow - use iterative version.</p>
+                <pre><code>vector&lt;bool&gt; vis;
+void dfsRec(int u, vector&lt;int&gt; adj[]) {
+    vis[u] = true;
+    cout &lt;&lt; u &lt;&lt; " "; // entry
+    for(int v : adj[u]) {
+        if(!vis[v])
+            dfsRec(v, adj);
+    }
+    // exit processing here
+}
+
+void dfsFull(int n, vector&lt;int&gt; adj[]) {
+    vis.assign(n, false);
+    for(int i = 0; i &lt; n; i++)
+        if(!vis[i]) dfsRec(i, adj);
+}</code></pre>
+            </section>
+
+            <section id="slide-242">
+                <h2><span class="section-num">242</span>DFS Code Iterative</h2>
+                <p>Iterative DFS uses explicit stack to avoid recursion limit. We push nodes and process when popped. To mimic recursive behavior, push neighbors in reverse order. Mark visited when pushing or popping depending on use case. Iterative version handles deep graphs without stack overflow. Time complexity remains O(V+E).</p>
+                <pre><code>void dfsIter(int s, vector&lt;int&gt; adj[], int n) {
+    vector&lt;bool&gt; vis(n, false);
+    stack&lt;int&gt; st;
+    st.push(s);
+    
+    while(!st.empty()) {
+        int u = st.top(); st.pop();
+        if(vis[u]) continue;
+        vis[u] = true;
+        
+        for(auto it = adj[u].rbegin(); it != adj[u].rend(); ++it) {
+            if(!vis[*it]) st.push(*it);
+        }
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-243">
+                <h2><span class="section-num">243</span>Connected Components</h2>
+                <p>In an undirected graph, connected components are maximal sets of vertices where each pair has a path. Run DFS/BFS from each unvisited vertex - each run discovers one component. Count of runs equals number of components. For directed graphs, we use Strongly Connected Components via Kosaraju or Tarjan. Complexity O(V+E) for entire graph traversal.</p>
+                <pre><code>int countComponents(vector&lt;int&gt; adj[], int n) {
+    vector&lt;bool&gt; vis(n, false);
+    int count = 0;
+    for(int i = 0; i &lt; n; i++) {
+        if(!vis[i]) {
+            dfs(i, adj, vis);
+            count++;
+        }
+    }
+    return count;
+}</code></pre>
+            </section>
+
+            <section id="slide-244">
+                <h2><span class="section-num">244</span>Cycle Detection DFS</h2>
+                <p>In undirected graphs, cycle exists if DFS finds a visited neighbor that's not the parent. In directed graphs, cycle exists if we encounter a vertex in current recursion stack - use gray coloring. For undirected: track parent parameter. For directed: use three colors - white unvisited, gray in-progress, black finished. Cycle detection is O(V+E).</p>
+                <pre><code>bool hasCycle(int u, int parent, vector&lt;int&gt; adj[], vector&lt;bool&gt;&amp; vis) {
+    vis[u] = true;
+    for(int v : adj[u]) {
+        if(!vis[v]) {
+            if(hasCycle(v, u, adj, vis)) return true;
+        } else if(v != parent) {
+            return true; // back edge found
+        }
+    }
+    return false;
+}</code></pre>
+            </section>
+
+            <section id="slide-245">
+                <h2><span class="section-num">245</span>Bipartite Check</h2>
+                <p>A graph is bipartite if vertices can be colored with 2 colors such that no edge connects same color vertices. Run BFS/DFS and try to 2-color. If we find an edge between same colors, graph is not bipartite. Bipartite graphs have no odd-length cycles. This check is O(V+E). Applications: matching, scheduling conflicts.</p>
+                <pre><code>bool isBipartite(vector&lt;int&gt; adj[], int n) {
+    vector&lt;int&gt; color(n, -1);
+    queue&lt;int&gt; q;
+    for(int i = 0; i &lt; n; i++) {
+        if(color[i] == -1) {
+            q.push(i); color[i] = 0;
+            while(!q.empty()) {
+                int u = q.front(); q.pop();
+                for(int v : adj[u]) {
+                    if(color[v] == -1) {
+                        color[v] = 1 - color[u];
+                        q.push(v);
+                    } else if(color[v] == color[u])
+                        return false;
+                }
+            }
+        }
+    }
+    return true;
+}</code></pre>
+            </section>
+
+            <section id="slide-246">
+                <h2><span class="section-num">246</span>Dijkstra Intro</h2>
+                <p>Dijkstra's algorithm finds shortest paths from source to all vertices in weighted graphs with non-negative edges. It maintains a priority queue of vertices by current shortest distance. Repeatedly extract minimum distance vertex and relax its edges. Greedy choice works because negative edges would invalidate the assumption that shortest path to extracted vertex is final. Time O((V+E)log V) with binary heap.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O((V+E)log V)</span>
+                    <span class="badge">Space: O(V)</span>
+                    <span class="badge">Req: w ≥ 0</span>
+                </div>
+                <pre><code>// Cannot handle negative weights
+// For negative: use Bellman-Ford O(VE)
+// For all-pairs: Floyd-Warshall O(V³)</code></pre>
+            </section>
+
+            <section id="slide-247">
+                <h2><span class="section-num">247</span>Dijkstra Dry Run</h2>
+                <p>Graph with 5 nodes: 0-1:4, 0-2:1, 1-3:1, 2-1:2, 2-3:5, 3-4:3. Start from 0. Initialize dist[0]=0, others INF. PQ: {0,0}. Extract 0, relax: dist[1]=4, dist[2]=1. PQ: {2,1},{1,4}. Extract 2, relax: dist[1]=3 better, dist[3]=6. PQ: {1,3},{3,6}. Extract 1, relax: dist[3]=4 better. Finally dist[4]=7.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <div class="trace">Step 0: dist=[0,∞,∞,∞,∞]<br>
+Relax 0: dist=[0,4,1,∞,∞]<br>
+Relax 2: dist=[0,3,1,6,∞]<br>
+Relax 1: dist=[0,3,1,4,∞]<br>
+Relax 3: dist=[0,3,1,4,7]<br>
+Final shortest: 0→2→1→3→4 = 7</div>
+                </details>
+            </section>
+
+            <section id="slide-248">
+                <h2><span class="section-num">248</span>Dijkstra Code</h2>
+                <p>Implementation using priority_queue for min-heap. We use greater&lt;&gt; to make it min-heap. Store {distance, vertex} pairs. Skip outdated entries where current dist[v] &lt; d from queue. Edge relaxation: if dist[u]+w &lt; dist[v], update and push. Parent array can reconstruct paths. For dense graphs, array-based O(V²) may be faster than heap version.</p>
+                <pre><code>vector&lt;int&gt; dijkstra(int s, vector&lt;pair&lt;int,int&gt;&gt; adj[], int n) {
+    vector&lt;int&gt; dist(n, 1e9);
+    priority_queue&lt;pii, vector&lt;pii&gt;, greater&lt;pii&gt;&gt; pq;
+    dist[s] = 0;
+    pq.push({0, s});
+    
+    while(!pq.empty()) {
+        auto [d, u] = pq.top(); pq.pop();
+        if(d &gt; dist[u]) continue;
+        for(auto [v, w] : adj[u]) {
+            if(dist[u] + w &lt; dist[v]) {
+                dist[v] = dist[u] + w;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+    return dist;
+}</code></pre>
+            </section>
+
+            <section id="slide-249">
+                <h2><span class="section-num">249</span>MST Intro</h2>
+                <p>Minimum Spanning Tree is a subset of edges connecting all vertices with minimum total weight and no cycles. MST exists for connected undirected weighted graphs. Properties: V-1 edges, unique if all weights distinct, cut property and cycle property. Applications: network design, clustering, approximation algorithms. Two main algorithms: Kruskal O(E log V) and Prim O((V+E)log V).</p>
+                <div class="complexity">
+                    <span class="badge">Edges: V-1</span>
+                    <span class="badge">Cost: Minimum</span>
+                </div>
+                <pre><code>// Graph: vertices 0-4
+// MST edges form tree covering all nodes
+// Total weight is minimized
+// No cycles allowed</code></pre>
+            </section>
+
+            <section id="slide-250">
+                <h2><span class="section-num">250</span>Kruskal Algorithm</h2>
+                <p>Kruskal's algorithm sorts all edges by weight and greedily adds smallest edge that doesn't form a cycle. Uses Disjoint Set Union to detect cycles efficiently. If edge connects two different components, add it and union the sets. Stop after V-1 edges added. Sorting dominates time O(E log E). Best for sparse graphs. Correctness follows from cut property of MSTs.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(E log E)</span>
+                    <span class="badge">Space: O(V)</span>
+                </div>
+                <pre><code>struct Edge { int u, v, w; };
+bool cmp(Edge a, Edge b) { return a.w &lt; b.w; }
+
+int kruskal(vector&lt;Edge&gt;&amp; edges, int n) {
+    sort(edges.begin(), edges.end(), cmp);
+    DSU dsu(n);
+    int mst = 0, cnt = 0;
+    for(auto e : edges) {
+        if(dsu.find(e.u) != dsu.find(e.v)) {
+            dsu.unite(e.u, e.v);
+            mst += e.w;
+            if(++cnt == n-1) break;
+        }
+    }
+    return mst;
+}</code></pre>
+            </section>
+
+            <section id="slide-251">
+                <h2><span class="section-num">251</span>DSU Find Union</h2>
+                <p>Disjoint Set Union supports find and union in nearly O(1) amortized time. Uses path compression in find to flatten tree, and union by rank/size to keep tree shallow. Find returns representative of set. Union merges two sets. Essential for Kruskal and dynamic connectivity. Initialize each element as its own parent with rank 0.</p>
+                <pre><code>struct DSU {
+    vector&lt;int&gt; par, sz;
+    DSU(int n) : par(n), sz(n,1) {
+        iota(par.begin(), par.end(), 0);
+    }
+    int find(int x) {
+        return x == par[x] ? x : par[x] = find(par[x]);
+    }
+    bool unite(int x, int y) {
+        x = find(x), y = find(y);
+        if(x == y) return false;
+        if(sz[x] &lt; sz[y]) swap(x, y);
+        par[y] = x; sz[x] += sz[y];
+        return true;
+    }
+};</code></pre>
+            </section>
+
+            <section id="slide-252">
+                <h2><span class="section-num">252</span>Kruskal Dry Run</h2>
+                <p>Edges: 0-1:4, 0-2:1, 1-3:1, 2-1:2, 2-3:5, 3-4:3. Sort by weight: [0-2:1, 1-3:1, 2-1:2, 3-4:3, 0-1:4, 2-3:5]. Process each: add 0-2, 1-3, 2-1 connects components, 3-4. Skip 0-1 as 0-2-1 already connected. Skip 2-3 forms cycle. MST weight: 1+1+2+3=7. Edges: 4 = V-1.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <div class="trace">Add 0-2 (1): components {0,2}{1}{3}{4}<br>
+Add 1-3 (1): components {0,2}{1,3}{4}<br>
+Add 2-1 (2): components {0,1,2,3}{4}<br>
+Add 3-4 (3): components {0,1,2,3,4}<br>
+MST = 7, edges = 4</div>
+                </details>
+            </section>
+
+            <section id="slide-253">
+                <h2><span class="section-num">253</span>Kruskal Code</h2>
+                <p>Complete Kruskal implementation with DSU. Sort edges, iterate and add if endpoints in different sets. Track edge count to stop early at V-1 edges. For disconnected graphs, result is Minimum Spanning Forest. Return -1 if fewer than V-1 edges added. Alternative: Prim's algorithm grows MST from single vertex.</p>
+                <pre><code>int MST_Kruskal(int n, vector&lt;array&lt;int,3&gt;&gt; edges) {
+    sort(edges.begin(), edges.end(), 
+         [](auto&amp; a, auto&amp; b){return a[2] &lt; b[2];});
+    DSU dsu(n);
+    int total = 0, count = 0;
+    for(auto [u, v, w] : edges) {
+        if(dsu.unite(u, v)) {
+            total += w;
+            if(++count == n-1) break;
+        }
+    }
+    return count == n-1 ? total : -1;
+}</code></pre>
+            </section>
+
+            <section id="slide-254">
+                <h2><span class="section-num">254</span>Prim Algorithm</h2>
+                <p>Prim's algorithm grows MST from a source vertex. Maintain set of vertices in MST and priority queue of edges crossing the cut. Repeatedly add minimum weight edge connecting MST to new vertex. Similar to Dijkstra but key is edge weight not path distance. Efficient for dense graphs with adjacency matrix O(V²) or heap O(E log V). Works by cut property.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(E log V)</span>
+                    <span class="badge">Space: O(V)</span>
+                </div>
+                <pre><code>int prim(vector&lt;pair&lt;int,int&gt;&gt; adj[], int n) {
+    vector&lt;bool&gt; inMST(n, false);
+    priority_queue&lt;pii, vector&lt;pii&gt;, greater&lt;pii&gt;&gt; pq;
+    pq.push({0, 0}); // {weight, vertex}
+    int mst = 0;
+    
+    while(!pq.empty()) {
+        auto [w, u] = pq.top(); pq.pop();
+        if(inMST[u]) continue;
+        inMST[u] = true;
+        mst += w;
+        for(auto [v, wt] : adj[u]) {
+            if(!inMST[v])
+                pq.push({wt, v});
+        }
+    }
+    return mst;
+}</code></pre>
+            </section>
+
+            <section id="slide-255">
+                <h2><span class="section-num">255</span>Topological Sort</h2>
+                <p>Topological Sort produces linear ordering of vertices in a Directed Acyclic Graph such that for edge u→v, u appears before v. Used for task scheduling with dependencies, course prerequisites, build systems. Only possible if graph has no directed cycles. There may be multiple valid orderings. Two algorithms: DFS-based and Kahn's algorithm using in-degrees.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(V+E)</span>
+                    <span class="badge">Req: DAG</span>
+                </div>
+                <pre><code>// DAG: 5→0, 5→2, 4→0, 4→1, 2→3, 3→1
+// Valid orders: 5,4,2,3,1,0 or 4,5,2,3,1,0
+// Invalid if cycle exists</code></pre>
+            </section>
+
+            <section id="slide-256">
+                <h2><span class="section-num">256</span>TopoSort DFS</h2>
+                <p>DFS-based topological sort pushes vertices onto stack after visiting all descendants. When DFS finishes for a vertex, all vertices reachable from it are already processed. Reverse of finish times gives topological order. If back edge found during DFS, graph has cycle and topo sort impossible. Stack stores result in reverse order.</p>
+                <pre><code>void dfsTopo(int u, vector&lt;int&gt; adj[], vector&lt;bool&gt;&amp; vis, stack&lt;int&gt;&amp; st) {
+    vis[u] = true;
+    for(int v : adj[u])
+        if(!vis[v])
+            dfsTopo(v, adj, vis, st);
+    st.push(u); // add after all descendants
+}
+
+vector&lt;int&gt; topoSort(int n, vector&lt;int&gt; adj[]) {
+    vector&lt;bool&gt; vis(n, false);
+    stack&lt;int&gt; st;
+    for(int i = 0; i &lt; n; i++)
+        if(!vis[i]) dfsTopo(i, adj, vis, st);
+    
+    vector&lt;int&gt; order;
+    while(!st.empty()) {
+        order.push_back(st.top());
+        st.pop();
+    }
+    return order;
+}</code></pre>
+            </section>
+
+            <section id="slide-257">
+                <h2><span class="section-num">257</span>Kahn's Algorithm</h2>
+                <p>Kahn's algorithm uses in-degrees. Start with vertices having in-degree 0 - no dependencies. Remove vertex and decrease in-degree of neighbors. Add new zero in-degree vertices to queue. Process until queue empty. If all vertices processed, we have valid topo order; else cycle exists. This is BFS-like and naturally detects cycles by counting processed nodes.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(V+E)</span>
+                    <span class="badge">Space: O(V)</span>
+                </div>
+                <pre><code>vector&lt;int&gt; kahn(int n, vector&lt;int&gt; adj[]) {
+    vector&lt;int&gt; indeg(n, 0);
+    for(int u = 0; u &lt; n; u++)
+        for(int v : adj[u])
+            indeg[v]++;
+    
+    queue&lt;int&gt; q;
+    for(int i = 0; i &lt; n; i++)
+        if(indeg[i] == 0) q.push(i);
+    
+    vector&lt;int&gt; order;
+    while(!q.empty()) {
+        int u = q.front(); q.pop();
+        order.push_back(u);
+        for(int v : adj[u])
+            if(--indeg[v] == 0)
+                q.push(v);
+    }
+    return order.size() == n ? order : vector&lt;int&gt;();
+}</code></pre>
+            </section>
+
+            <section id="slide-258">
+                <h2><span class="section-num">258</span>TopoSort Dry Run</h2>
+                <p>Graph: 5→0, 5→2, 4→0, 4→1, 2→3, 3→1. In-degrees: 0:2, 1:2, 2:1, 3:1, 4:0, 5:0. Start with 4,5 (indeg 0). Remove 4: 0:1, 1:1. Remove 5: 0:0, 2:0. Add 0,2. Remove 0. Remove 2: 3:0. Add 3. Remove 3: 1:0. Add 1. Remove 1. Order: 4,5,0,2,3,1. Verify: all edges go forward.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <div class="trace">Initial queue: [4,5]<br>
+Pop 4: queue=[5], indeg[0]--, indeg[1]--<br>
+Pop 5: queue=[0,2]<br>
+Pop 0: queue=[2]<br>
+Pop 2: queue=[3]<br>
+Pop 3: queue=[1]<br>
+Pop 1: queue=[]<br>
+Order: [4,5,0,2,3,1] ✓</div>
+                </details>
+            </section>
+<section id="slide-259">
+                <h2><span class="section-num">259</span>BFS Applications</h2>
+                <p>BFS solves shortest path in unweighted graphs by exploring vertices in distance order. Other applications include web crawlers, social networking friend suggestions, GPS navigation, peer-to-peer networks, and testing bipartiteness. Level-order traversal of trees is BFS. Finding all nodes at distance k, or within k steps, uses BFS with level tracking. BFS guarantees minimum edges in path.</p>
+                <pre><code>// Find nodes at distance k
+vector&lt;int&gt; atDistanceK(int s, int k, vector&lt;int&gt; adj[], int n) {
+    vector&lt;int&gt; dist(n, -1);
+    queue&lt;int&gt; q;
+    q.push(s); dist[s] = 0;
+    vector&lt;int&gt; result;
+    while(!q.empty()) {
+        int u = q.front(); q.pop();
+        if(dist[u] == k) result.push_back(u);
+        if(dist[u] &gt; k) break;
+        for(int v : adj[u])
+            if(dist[v] == -1) {
+                dist[v] = dist[u] + 1;
+                q.push(v);
+            }
+    }
+    return result;
+}</code></pre>
+            </section>
+
+            <section id="slide-260">
+                <h2><span class="section-num">260</span>DFS Applications</h2>
+                <p>DFS excels at connectivity problems, cycle detection, pathfinding, and graph structure analysis. Applications include maze solving, topological sorting, finding strongly connected components, biconnected components, and bridges/articulation points. DFS tree classifies edges as tree, back, forward, or cross edges. Memory efficient for deep searches. Pre-order and post-order traversals enable many computations.</p>
+                <pre><code>// Find if path exists
+bool hasPath(int u, int v, vector&lt;int&gt; adj[], vector&lt;bool&gt;&amp; vis) {
+    if(u == v) return true;
+    vis[u] = true;
+    for(int w : adj[u])
+        if(!vis[w] &amp;&amp; hasPath(w, v, adj, vis))
+            return true;
+    return false;
+}</code></pre>
+            </section>
+
+            <section id="slide-261">
+                <h2><span class="section-num">261</span>Shortest Path Variants</h2>
+                <p>Single-Source Shortest Path: Dijkstra for non-negative, Bellman-Ford for negative edges. All-Pairs Shortest Path: Floyd-Warshall O(V³), Johnson's O(VE log V). Single-Pair: A* with heuristic. SSSP in DAG: topological order + relaxation O(V+E). For unweighted: BFS O(V+E). Choose based on graph properties: weights, cycles, density, queries.</p>
+                <div class="complexity">
+                    <span class="badge">Dijkstra: O(E log V)</span>
+                    <span class="badge">Bellman-Ford: O(VE)</span>
+                    <span class="badge">Floyd-Warshall: O(V³)</span>
+                </div>
+                <pre><code>// DAG shortest path
+vector&lt;int&gt; dagSP(int s, vector&lt;pair&lt;int,int&gt;&gt; adj[], int n) {
+    vector&lt;int&gt; order = topoSort(n, adj);
+    vector&lt;int&gt; dist(n, 1e9);
+    dist[s] = 0;
+    for(int u : order) {
+        if(dist[u] != 1e9)
+            for(auto [v, w] : adj[u])
+                dist[v] = min(dist[v], dist[u] + w);
+    }
+    return dist;
+}</code></pre>
+            </section>
+
+            <section id="slide-262">
+                <h2><span class="section-num">262</span>Bellman-Ford Algorithm</h2>
+                <p>Bellman-Ford computes shortest paths from source in graphs with negative edge weights. It relaxes all edges V-1 times, ensuring shortest paths with up to V-1 edges are found. A V-th relaxation detecting changes indicates negative cycle. Slower than Dijkstra O(VE) but handles negative weights. Used in distance-vector routing protocols. Returns false if negative cycle reachable from source.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(VE)</span>
+                    <span class="badge">Space: O(V)</span>
+                </div>
+                <pre><code>bool bellmanFord(int s, vector&lt;Edge&gt;&amp; edges, int n, vector&lt;int&gt;&amp; dist) {
+    dist.assign(n, 1e9);
+    dist[s] = 0;
+    for(int i = 0; i &lt; n-1; i++) {
+        for(auto [u, v, w] : edges) {
+            if(dist[u] != 1e9 &amp;&amp; dist[u] + w &lt; dist[v])
+                dist[v] = dist[u] + w;
+        }
+    }
+    // Check negative cycle
+    for(auto [u, v, w] : edges)
+        if(dist[u] != 1e9 &amp;&amp; dist[u] + w &lt; dist[v])
+            return false; // negative cycle
+    return true;
+}</code></pre>
+            </section>
+
+            <section id="slide-263">
+                <h2><span class="section-num">263</span>Floyd-Warshall Algorithm</h2>
+                <p>Floyd-Warshall computes shortest paths between all pairs of vertices. Uses dynamic programming: for each intermediate vertex k, update distance[i][j] = min(distance[i][j], distance[i][k] + distance[k][j]). Handles negative edges but no negative cycles. Simple O(V³) implementation with three nested loops. Space O(V²) for distance matrix. Good for dense graphs or multiple queries.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(V³)</span>
+                    <span class="badge">Space: O(V²)</span>
+                </div>
+                <pre><code>void floydWarshall(vector&lt;vector&lt;int&gt;&gt;&amp; dist, int n) {
+    for(int k = 0; k &lt; n; k++) {
+        for(int i = 0; i &lt; n; i++) {
+            for(int j = 0; j &lt; n; j++) {
+                if(dist[i][k] != 1e9 &amp;&amp; dist[k][j] != 1e9)
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+            }
+        }
+    }
+    // Check negative cycle: dist[i][i] &lt; 0
+}</code></pre>
+            </section>
+
+            <section id="slide-264">
+                <h2><span class="section-num">264</span>A* Search Algorithm</h2>
+                <p>A* is an informed search algorithm using heuristic h(n) estimating cost to goal. Priority is f(n) = g(n) + h(n) where g(n) is cost from start. With admissible heuristic (never overestimates), A* finds optimal path. Heuristic guides search toward goal, exploring fewer nodes than Dijkstra. Used in pathfinding, games, robotics. Performance depends on heuristic quality.</p>
+                <pre><code>// Manhattan distance heuristic for grid
+int heuristic(int x1, int y1, int x2, int y2) {
+    return abs(x1 - x2) + abs(y1 - y2);
+}
+
+void aStar(int start, int goal) {
+    priority_queue&lt;Node&gt; pq; // by f = g + h
+    // ... similar to Dijkstra but priority = g + h
+}</code></pre>
+            </section>
+
+            <section id="slide-265">
+                <h2><span class="section-num">265</span>Minimum Spanning Tree Properties</h2>
+                <p>MST Cut Property: For any cut of graph, minimum weight edge crossing cut is in MST. Cycle Property: For any cycle, maximum weight edge is not in MST. MST is unique if all edge weights distinct. Number of MSTs equals number of spanning trees if weights equal. MST weight equals sum of cheapest edges connecting components during Kruskal. Union of MSTs of components gives MSF.</p>
+                <pre><code>// Cut property example
+// Cut: {0,1} | {2,3,4}
+// Edges crossing: 0-2:1, 1-3:1, 1-2:2
+// Minimum 0-2 or 1-3 must be in MST</code></pre>
+            </section>
+
+            <section id="slide-266">
+                <h2><span class="section-num">266</span>Prim vs Kruskal</h2>
+                <p>Prim grows tree from vertex, good for dense graphs with adjacency matrix O(V²) or Fibonacci heap O(E+V log V). Kruskal processes edges globally, good for sparse graphs O(E log E). Prim better when graph given as adjacency matrix. Kruskal better when edges already sorted or few edges. Both use greedy strategy. Prim uses priority queue, Kruskal uses DSU.</p>
+                <div class="complexity">
+                    <span class="badge">Prim Dense: O(V²)</span>
+                    <span class="badge">Prim Sparse: O(E log V)</span>
+                    <span class="badge">Kruskal: O(E log E)</span>
+                </div>
+                <pre><code>// Choose Prim for dense, Kruskal for sparse
+// If E ≈ V², use Prim array version
+// If E ≈ V, use Kruskal</code></pre>
+            </section>
+
+            <section id="slide-267">
+                <h2><span class="section-num">267</span>Strongly Connected Components</h2>
+                <p>In directed graphs, SCC is maximal set where each vertex reaches every other. Kosaraju's algorithm: DFS to get finish times, transpose graph, DFS in decreasing finish time order. Tarjan's algorithm uses single DFS with low-link values. SCCs form DAG of meta-nodes. Used in 2-SAT, web analysis, compiler optimization. Time O(V+E) for both algorithms.</p>
+                <pre><code>void kosaraju(int n, vector&lt;int&gt; adj[]) {
+    // 1. DFS and push to stack by finish time
+    // 2. Transpose graph
+    // 3. Pop from stack, DFS on transpose
+    // Each DFS tree is one SCC
+}</code></pre>
+            </section>
+
+            <section id="slide-268">
+                <h2><span class="section-num">268</span>Bridges in Graph</h2>
+                <p>Bridge is edge whose removal increases connected components. Found using DFS with discovery time disc[] and low[] = earliest discovered vertex reachable from subtree. Edge u-v is bridge if low[v] &gt; disc[u], meaning no back-edge from v or its descendants to u or ancestors. Bridges critical for network reliability. Single DFS O(V+E).</p>
+                <pre><code>void findBridges(int u, int parent, vector&lt;int&gt; adj[]) {
+    static int time = 0;
+    disc[u] = low[u] = ++time;
+    for(int v : adj[u]) {
+        if(v == parent) continue;
+        if(!disc[v]) {
+            findBridges(v, u, adj);
+            low[u] = min(low[u], low[v]);
+            if(low[v] &gt; disc[u])
+                bridges.push_back({u,v});
+        } else {
+            low[u] = min(low[u], disc[v]);
+        }
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-269">
+                <h2><span class="section-num">269</span>Articulation Points</h2>
+                <p>Articulation point (cut vertex) is vertex whose removal increases components. Root is AP if it has ≥2 children in DFS tree. Non-root u is AP if it has child v with low[v] ≥ disc[u], meaning no back-edge from subtree of v to ancestor of u. Found with DFS similar to bridges. Critical for network robustness analysis.</p>
+                <pre><code>void findAP(int u, int parent, vector&lt;int&gt; adj[]) {
+    static int time = 0;
+    disc[u] = low[u] = ++time;
+    int children = 0;
+    for(int v : adj[u]) {
+        if(v == parent) continue;
+        if(!disc[v]) {
+            children++;
+            findAP(v, u, adj);
+            low[u] = min(low[u], low[v]);
+            if(parent != -1 &amp;&amp; low[v] &gt;= disc[u])
+                isAP[u] = true;
+        } else {
+            low[u] = min(low[u], disc[v]);
+        }
+    }
+    if(parent == -1 &amp;&amp; children &gt; 1)
+        isAP[u] = true;
+}</code></pre>
+            </section>
+
+            <section id="slide-270">
+                <h2><span class="section-num">270</span>Euler Path &amp; Circuit</h2>
+                <p>Euler Path visits every edge exactly once. Euler Circuit is closed Euler Path. Undirected graph has Euler Circuit iff all vertices have even degree and connected. Has Euler Path iff exactly 0 or 2 vertices have odd degree. Directed: in-degree = out-degree for circuit, at most one vertex out-in=1 and one in-out=1 for path. Hierholzer's algorithm finds path O(E).</p>
+                <pre><code>// Check if Euler Circuit exists
+bool hasEulerCircuit(vector&lt;int&gt; adj[], int n) {
+    for(int i = 0; i &lt; n; i++)
+        if(adj[i].size() % 2 != 0)
+            return false;
+    return isConnected(adj, n);
+}</code></pre>
+            </section>
+
+            <section id="slide-271">
+                <h2><span class="section-num">271</span>Hamiltonian Path</h2>
+                <p>Hamiltonian Path visits every vertex exactly once. Hamiltonian Cycle returns to start. No efficient algorithm known - NP-Complete problem. Naive backtracking O(N!). Used in traveling salesman approximations. Dirac's theorem: if each vertex degree ≥ n/2, Hamiltonian cycle exists. Ore's theorem: if deg(u)+deg(v) ≥ n for non-adjacent u,v, cycle exists.</p>
+                <pre><code>// Backtracking for Hamiltonian Path
+bool hamiltonianPath(vector&lt;int&gt; adj[], int n, 
+                     vector&lt;int&gt;&amp; path, int pos) {
+    if(pos == n) return true;
+    for(int v : adj[path[pos-1]]) {
+        if(!used[v]) {
+            used[v] = true;
+            path[pos] = v;
+            if(hamiltonianPath(adj, n, path, pos+1))
+                return true;
+            used[v] = false;
+        }
+    }
+    return false;
+}</code></pre>
+            </section>
+
+            <section id="slide-272">
+                <h2><span class="section-num">272</span>Graph Coloring</h2>
+                <p>Graph coloring assigns colors to vertices such that adjacent vertices have different colors. Chromatic number χ(G) is minimum colors needed. Bipartite graphs have χ=2. Planar graphs have χ≤4. NP-Hard for general graphs but greedy coloring gives upper bound Δ+1 where Δ is max degree. Welsh-Powell orders by degree. Used in scheduling, register allocation, map coloring.</p>
+                <pre><code>// Greedy coloring
+vector&lt;int&gt; greedyColor(vector&lt;int&gt; adj[], int n) {
+    vector&lt;int&gt; result(n, -1);
+    result[0] = 0;
+    vector&lt;bool&gt; available(n, false);
+    
+    for(int u = 1; u &lt; n; u++) {
+        for(int v : adj[u])
+            if(result[v] != -1)
+                available[result[v]] = true;
+        int cr;
+        for(cr = 0; cr &lt; n; cr++)
+            if(!available[cr]) break;
+        result[u] = cr;
+        fill(available.begin(), available.end(), false);
+    }
+    return result;
+}</code></pre>
+            </section>
+
+            <section id="slide-273">
+                <h2><span class="section-num">273</span>Maximum Flow</h2>
+                <p>Max Flow finds maximum flow from source to sink in flow network with edge capacities. Ford-Fulkerson uses augmenting paths O(E·max_flow). Edmonds-Karp uses BFS for shortest augmenting path O(VE²). Dinic's algorithm O(V²E) faster in practice. Min-Cut Max-Flow theorem: max flow equals min cut capacity. Applications: bipartite matching, network reliability, image segmentation.</p>
+                <div class="complexity">
+                    <span class="badge">Edmonds-Karp: O(VE²)</span>
+                    <span class="badge">Dinic: O(V²E)</span>
+                </div>
+                <pre><code>// Edmonds-Karp BFS to find augmenting path
+int bfs(int s, int t, vector&lt;int&gt; adj[], int cap[][MAX]) {
+    fill(parent, parent+MAX, -1);
+    queue&lt;pair&lt;int,int&gt;&gt; q;
+    q.push({s, 1e9});
+    while(!q.empty()) {
+        auto [u, flow] = q.front(); q.pop();
+        for(int v : adj[u]) {
+            if(parent[v] == -1 &amp;&amp; cap[u][v] &gt; 0) {
+                parent[v] = u;
+                int new_flow = min(flow, cap[u][v]);
+                if(v == t) return new_flow;
+                q.push({v, new_flow});
+            }
+        }
+    }
+    return 0;
+}</code></pre>
+            </section>
+
+            <section id="slide-274">
+                <h2><span class="section-num">274</span>Bipartite Matching</h2>
+                <p>Maximum Bipartite Matching pairs vertices from two sets with maximum edges, no vertex repeated. Can be solved via Max Flow: add source to left, sink to right, all capacities 1. Kuhn's algorithm uses DFS O(VE), Hopcroft-Karp O(E√V). Hall's Marriage Theorem: matching exists iff for every subset S of left, |N(S)| ≥ |S|. Used in assignment problems.</p>
+                <pre><code>// Kuhn's algorithm O(VE)
+bool dfs(int u, vector&lt;int&gt; adj[], vector&lt;int&gt;&amp; match, vector&lt;bool&gt;&amp; vis) {
+    for(int v : adj[u]) {
+        if(vis[v]) continue;
+        vis[v] = true;
+        if(match[v] == -1 || dfs(match[v], adj, match, vis)) {
+            match[v] = u;
+            return true;
+        }
+    }
+    return false;
+}</code></pre>
+            </section>
+
+            <section id="slide-275">
+                <h2><span class="section-num">275</span>Practice: BFS vs DFS</h2>
+                <p>You need to find shortest path in an unweighted maze from start to end. The maze is represented as a grid. Which algorithm should you use: BFS or DFS? Consider path optimality, memory usage, and implementation complexity. What if the maze was weighted with different movement costs?</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: BFS for unweighted, Dijkstra/A* for weighted</strong></p>
+                    <p>BFS guarantees shortest path in unweighted graphs because it explores level by level. DFS may find a path but not shortest. For weighted maze, use Dijkstra or A* with Manhattan heuristic. BFS: O(V+E) time, O(V) space. Queue ensures first time we reach end is shortest path.</p>
+                </details>
+            </section>
+
+            <section id="slide-276">
+                <h2><span class="section-num">276</span>Practice: Cycle Detection</h2>
+                <p>Given a list of course prerequisites as directed edges, determine if a student can complete all courses. This is equivalent to checking if the dependency graph has a cycle. If there is a cycle like A→B→C→A, completion is impossible. Which algorithm and how would you implement it?</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: DFS with recursion stack or Kahn's algorithm</strong></p>
+                    <p>Use DFS with three colors: white (unvisited), gray (in stack), black (done). If we reach gray node, cycle exists. Alternatively, use Kahn's algorithm: if topological sort produces less than V vertices, cycle exists. Time O(V+E). If no cycle, topological order gives valid course sequence.</p>
+                </details>
+            </section>
+
+            <section id="slide-277">
+                <h2><span class="section-num">277</span>Practice: MST Application</h2>
+                <p>A company needs to connect 5 office buildings with minimum cost fiber cables. Distances between buildings are known. Some pairs cannot be connected directly due to obstacles. Model this and find minimum cost. Which algorithm is appropriate and what is the complexity?</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: Kruskal or Prim on valid edges only</strong></p>
+                    <p>Model as weighted graph where vertices are buildings, edges are valid cable routes with distances as weights. Run Kruskal: sort edges O(E log E), DSU operations ≈O(E). Or Prim from any building O(E log V). Both give MST with minimum total cable length. If graph disconnected, no solution exists.</p>
+                </details>
+            </section>
+
+            <section id="slide-278">
+                <h2><span class="section-num">278</span>Practice: Shortest Path Choice</h2>
+                <p>Find shortest path from city A to city B. Roads have distances, some roads are one-way, and some have tolls (negative cost if sponsored). Which shortest path algorithm should you use? Consider presence of negative edges and requirement for single-source vs all-pairs.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: Bellman-Ford if negative edges, Dijkstra if all non-negative</strong></p>
+                    <p>If negative weights exist (sponsored roads), use Bellman-Ford O(VE) to handle them and detect negative cycles. If all weights ≥0, Dijkstra O(E log V) is faster. For one-way roads use directed graph. For single pair query, can stop Dijkstra early when B is extracted. For multiple queries, consider Floyd-Warshall.</p>
+                </details>
+            </section>
+
+            <section id="slide-279">
+                <h2><span class="section-num">279</span>Graph Traversal Comparison</h2>
+                <p>Compare BFS and DFS in terms of implementation, memory, path quality, and use cases. BFS uses queue and explores level by level, finding shortest path in unweighted graphs but using more memory O(w) where w is max width. DFS uses stack/recursion, O(h) memory where h is max depth, finds any path but not necessarily shortest. Choose based on problem needs.</p>
+                <div class="complexity">
+                    <span class="badge">BFS: Shortest path, more memory</span>
+                    <span class="badge">DFS: Less memory, any path</span>
+                </div>
+                <pre><code>// BFS: Queue, level-order
+// Good for: shortest path, level-wise, finding connected
+
+// DFS: Stack/Recursion, depth-order  
+// Good for: path existence, topo sort, cycles, SCC</code></pre>
+            </section>
+
+            <section id="slide-280">
+                <h2><span class="section-num">280</span>Graph Representation Choice</h2>
+                <p>Adjacency Matrix O(V²) vs Adjacency List O(V+E). Matrix: O(1) edge query, O(V) neighbor iteration, wasteful for sparse graphs. List: O(degree) edge query, O(degree) neighbor iteration, space efficient. Choose matrix for dense graphs (E≈V²) or frequent edge existence queries. Choose list for sparse graphs (E≈V) or graph algorithms. Edge list O(E) for Kruskal.</p>
+                <div class="complexity">
+                    <span class="badge">Matrix: Dense, O(1) query</span>
+                    <span class="badge">List: Sparse, O(V+E) space</span>
+                </div>
+                <pre><code>// Matrix: if E &gt; V²/4, use matrix
+// List: if E &lt; V²/4, use list
+// Edge List: for sorting edges (Kruskal)</code></pre>
+            </section>
+
+            <section id="slide-281">
+                <h2><span class="section-num">281</span>Directed vs Undirected</h2>
+                <p>Undirected edges represent symmetric relationships like friendship, bidirectional roads. Directed edges represent asymmetric like follows, one-way streets, dependencies. Algorithms differ: undirected cycle detection simpler, directed needs SCCs. Undirected edges stored twice in adjacency list. Tree edges in undirected always have back edges. Choose representation matching real-world relationship.</p>
+                <pre><code>// Undirected: add edge both ways
+adj[u].push_back(v);
+adj[v].push_back(u);
+
+// Directed: add one way
+adj[u].push_back(v);</code></pre>
+            </section>
+
+            <section id="slide-282">
+                <h2><span class="section-num">282</span>Weighted vs Unweighted</h2>
+                <p>Unweighted graphs: BFS finds shortest path, edges have unit weight. Weighted graphs: edges have costs, use Dijkstra/Bellman-Ford. Unweighted is special case of weighted with all weights 1. Algorithms for weighted are slower O(E log V) vs O(V+E). If weights are small integers, consider BFS with multiple layers or Dial's algorithm O(V+C).</p>
+                <pre><code>// Unweighted: BFS
+queue&lt;int&gt; q; dist[s] = 0;
+
+// Weighted: Dijkstra
+priority_queue&lt;pair&lt;int,int&gt;&gt; pq; dist[s] = 0;</code></pre>
+            </section>
+
+            <section id="slide-283">
+                <h2><span class="section-num">283</span>Dense vs Sparse Graphs</h2>
+                <p>Dense graph: E ≈ V², most pairs connected. Sparse graph: E ≈ V, few connections. Impact: Adjacency matrix good for dense O(V²) space acceptable. List good for sparse O(V+E). Algorithm choice: Dense use O(V²) Prim or Floyd-Warshall. Sparse use O(E log V) Dijkstra or list-based BFS/DFS. Most real-world graphs sparse: road networks, social networks.</p>
+                <div class="complexity">
+                    <span class="badge">Sparse: E = O(V)</span>
+                    <span class="badge">Dense: E = O(V²)</span>
+                </div>
+            </section>
+
+            <section id="slide-284">
+                <h2><span class="section-num">284</span>Tree vs Graph</h2>
+                <p>Tree is connected acyclic undirected graph with V-1 edges. Properties: unique path between nodes, no cycles, removing any edge disconnects. Simplifies algorithms: DFS/BFS no visited check needed (except parent), no cycle detection. Diameter, LCA, centroid decomposition. Many graph problems easier on trees. MST of connected graph is tree.</p>
+                <pre><code>// Tree specific: no cycle check
+void dfsTree(int u, int parent, vector&lt;int&gt; adj[]) {
+    for(int v : adj[u]) {
+        if(v != parent) { // only check parent
+            dfsTree(v, u, adj);
+        }
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-285">
+                <h2><span class="section-num">285</span>DAG Properties</h2>
+                <p>Directed Acyclic Graph has topological ordering, no directed cycles. Has at least one vertex with in-degree 0 (source) and one with out-degree 0 (sink). Longest path found in O(V+E) using topo sort + relaxation. Shortest path in DAG also O(V+E), faster than Dijkstra. Used for scheduling, version control, data processing pipelines, expression evaluation.</p>
+                <pre><code>// Longest path in DAG
+vector&lt;int&gt; topo = topologicalSort(adj, n);
+vector&lt;int&gt; dist(n, -1e9);
+dist[source] = 0;
+for(int u : topo) {
+    if(dist[u] != -1e9)
+        for(auto [v,w] : adj[u])
+            dist[v] = max(dist[v], dist[u] + w);
+}</code></pre>
+            </section>
+
+            <section id="slide-286">
+                <h2><span class="section-num">286</span>Bidirectional Search</h2>
+                <p>Bidirectional BFS runs search from both start and goal simultaneously, meeting in middle. Reduces search space from O(b^d) to O(b^(d/2)) where b is branching factor, d is distance. Both frontiers use BFS. Stop when frontiers meet. Useful when both start and goal known. Implementation maintains two queues and visited sets. Cuts exponential factor in half.</p>
+                <pre><code>int bidirectionalBFS(int s, int t, vector&lt;int&gt; adj[]) {
+    if(s == t) return 0;
+    queue&lt;int&gt; q1, q2;
+    unordered_set&lt;int&gt; v1, v2;
+    q1.push(s); v1.insert(s);
+    q2.push(t); v2.insert(t);
+    int dist = 0;
+    while(!q1.empty() &amp;&amp; !q2.empty()) {
+        dist++;
+        if(expand(q1, v1, v2, adj)) return dist;
+        dist++;
+        if(expand(q2, v2, v1, adj)) return dist;
+    }
+    return -1;
+}</code></pre>
+            </section>
+
+            <section id="slide-287">
+                <h2><span class="section-num">287</span>0-1 BFS</h2>
+                <p>0-1 BFS finds shortest path when edge weights are only 0 or 1. Uses deque: weight 0 edges pushed to front, weight 1 to back. Maintains monotonic queue where distances are non-decreasing. Each vertex processed at most twice. Time O(V+E), faster than Dijkstra O(E log V). Useful in grid problems with obstacles or special moves.</p>
+                <pre><code>vector&lt;int&gt; bfs01(int s, vector&lt;pair&lt;int,int&gt;&gt; adj[], int n) {
+    vector&lt;int&gt; dist(n, 1e9);
+    deque&lt;int&gt; dq;
+    dist[s] = 0;
+    dq.push_back(s);
+    while(!dq.empty()) {
+        int u = dq.front(); dq.pop_front();
+        for(auto [v, w] : adj[u]) {
+            if(dist[u] + w &lt; dist[v]) {
+                dist[v] = dist[u] + w;
+                if(w == 0) dq.push_front(v);
+                else dq.push_back(v);
+            }
+        }
+    }
+    return dist;
+}</code></pre>
+            </section>
+
+            <section id="slide-288">
+                <h2><span class="section-num">288</span>Dijkstra Limitations</h2>
+                <p>Dijkstra fails with negative edge weights because greedy choice assumes shortest path to vertex is finalized when extracted. Negative edge later could provide shorter path, violating assumption. Does not detect negative cycles. For negative weights without cycles, use Bellman-Ford. For negative cycles, no shortest path defined. Always verify non-negative weights before using Dijkstra.</p>
+                <pre><code>// Fails: 0→1:1, 0→2:4, 1→2:-3
+// Dijkstra: dist[2]=4, misses 0→1→2= -2
+// Use Bellman-Ford for negative edges</code></pre>
+            </section>
+
+            <section id="slide-289">
+                <h2><span class="section-num">289</span>Negative Cycle Detection</h2>
+                <p>Negative cycle is cycle with negative total weight, allowing infinitely decreasing paths. Bellman-Ford detects: after V-1 iterations, if any edge can still relax, negative cycle exists. Floyd-Warshall: if dist[i][i] &lt; 0 for any i, negative cycle exists. SPFA (queue-based Bellman-Ford) also detects. If negative cycle reachable, shortest path undefined. Must handle in arbitrage, currency exchange.</p>
+                <pre><code>// Bellman-Ford negative cycle check
+for(int i = 0; i &lt; n; i++) {
+    for(auto [u, v, w] : edges) {
+        if(dist[u] != 1e9 &amp;&amp; dist[u] + w &lt; dist[v]) {
+            // Negative cycle detected
+            return false;
+        }
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-290">
+                <h2><span class="section-num">290</span>Kruskal Correctness</h2>
+                <p>Kruskal's correctness follows from Cut Property: minimum edge crossing any cut is in some MST. Algorithm considers edges in increasing weight. When considering edge e, if it connects two components, it is minimum crossing the cut between them. Cycle Property ensures we skip edges forming cycles. Cut Property ensures we include necessary edges. Induction proves final tree is MST.</p>
+                <pre><code>// Proof sketch:
+// 1. Algorithm produces spanning tree (V-1 edges, connected)
+// 2. No cycle (DSU prevents)
+// 3. Minimal by cut property</code></pre>
+            </section>
+
+            <section id="slide-291">
+                <h2><span class="section-num">291</span>Prim Correctness</h2>
+                <p>Prim's correctness also uses Cut Property. Algorithm maintains set S of vertices in MST. At each step, adds minimum weight edge crossing cut (S, V-S). This edge must be in some MST by Cut Property. Induction: after k iterations, we have MST of first k+1 vertices. Finally covers all vertices. Priority queue ensures minimum edge selected efficiently.</p>
+                <pre><code>// Invariant: Current tree T is subtree of some MST
+// Step: Add min edge leaving T
+// By cut property, this edge is safe</code></pre>
+            </section>
+
+            <section id="slide-292">
+                <h2><span class="section-num">292</span>Union Find Optimizations</h2>
+                <p>Path Compression: during find, make nodes point to root, flattening tree. Union by Rank/Size: attach smaller tree to larger, keeping height logarithmic. Together give inverse Ackermann α(n) ≈ constant amortized time per operation. Without optimizations: O(log n) or O(n). Essential for efficient Kruskal, dynamic connectivity, offline queries. Space O(n) for parent and rank arrays.</p>
+                <div class="complexity">
+                    <span class="badge">Amortized: O(α(n))</span>
+                    <span class="badge">α(n) ≤ 5 for n ≤ 2^65536</span>
+                </div>
+                <pre><code>// Path compression
+int find(int x) {
+    if(x != par[x])
+        par[x] = find(par[x]); // compress
+    return par[x];
+}
+
+// Union by size
+if(sz[x] &lt; sz[y]) swap(x,y);
+par[y] = x; sz[x] += sz[y];</code></pre>
+            </section>
+
+            <section id="slide-293">
+                <h2><span class="section-num">293</span>Graph Traversal Orders</h2>
+                <p>Pre-order: process node before children (DFS entry). Post-order: process after children (DFS exit). Topo sort uses reverse post-order. In-order for binary trees. Level-order is BFS. Pre-order used for tree serialization. Post-order for deletion, dependency resolution. Euler tour stores both entry and exit times. Different orders enable different computations on trees and graphs.</p>
+                <pre><code>void dfs(int u) {
+    process(u); // pre-order
+    for(int v : adj[u])
+        dfs(v);
+    finish(u); // post-order
+}</code></pre>
+            </section>
+
+            <section id="slide-294">
+                <h2><span class="section-num">294</span>Multi-Source BFS</h2>
+                <p>Multi-Source BFS starts from multiple sources simultaneously. Initialize queue with all sources at distance 0. Useful for finding shortest distance from any source, like nearest hospital, fire station spread, or multi-source shortest path. Also used in 0-1 BFS and Dijkstra with multiple starts. Time O(V+E) same as single-source. Each vertex assigned to nearest source.</p>
+                <pre><code>vector&lt;int&gt; multiBFS(vector&lt;int&gt;&amp; sources, vector&lt;int&gt; adj[], int n) {
+    vector&lt;int&gt; dist(n, -1);
+    queue&lt;int&gt; q;
+    for(int s : sources) {
+        dist[s] = 0;
+        q.push(s);
+    }
+    while(!q.empty()) {
+        int u = q.front(); q.pop();
+        for(int v : adj[u]) {
+            if(dist[v] == -1) {
+                dist[v] = dist[u] + 1;
+                q.push(v);
+            }
+        }
+    }
+    return dist;
+}</code></pre>
+            </section>
+
+            <section id="slide-295">
+                <h2><span class="section-num">295</span>Functional Graph</h2>
+                <p>Functional Graph is directed graph where each vertex has out-degree exactly 1. Each node has unique successor, like in permutation or succ() function. Structure: each weak component has unique cycle with trees attached. Cycle detection: Floyd's Tortoise-Hare O(n) time O(1) space. Used in cycle finding, periodic sequences, pollard-rho factorization.</p>
+                <pre><code>// Floyd's cycle detection
+int tortoise = f(x0), hare = f(f(x0));
+while(tortoise != hare) {
+    tortoise = f(tortoise);
+    hare = f(f(hare));
+}
+// Find cycle start
+tortoise = x0;
+while(tortoise != hare) {
+    tortoise = f(tortoise);
+    hare = f(hare);
+}</code></pre>
+            </section>
+
+            <section id="slide-296">
+                <h2><span class="section-num">296</span>Tree Diameter</h2>
+                <p>Diameter of tree is longest path between any two nodes. Found using two BFS/DFS: start from arbitrary node, find farthest node u, then find farthest from u, that distance is diameter. Works because second BFS from endpoint of diameter. For weighted trees, same algorithm with Dijkstra. Time O(V+E). Also computable via DP on trees in one DFS.</p>
+                <pre><code>pair&lt;int,int&gt; bfs(int s, vector&lt;int&gt; adj[], int n) {
+    vector&lt;int&gt; dist(n, -1);
+    queue&lt;int&gt; q; q.push(s); dist[s] = 0;
+    int far = s;
+    while(!q.empty()) {
+        int u = q.front(); q.pop();
+        if(dist[u] &gt; dist[far]) far = u;
+        for(int v : adj[u])
+            if(dist[v] == -1) {
+                dist[v] = dist[u] + 1;
+                q.push(v);
+            }
+    }
+    return {far, dist[far]};
+}
+// diameter = bfs(bfs(0,adj,n).first, adj,n).second</code></pre>
+            </section>
+
+            <section id="slide-297">
+                <h2><span class="section-num">297</span>LCA Binary Lifting</h2>
+                <p>Lowest Common Ancestor of two nodes is deepest node that has both as descendants. Binary lifting preprocesses O(n log n) to answer queries O(log n). Precompute up[v][j] = 2^j-th ancestor of v. For query, lift deeper node to same level, then binary search upward until parents differ. Used in tree queries, distance queries: dist(u,v) = depth[u]+depth[v]-2*depth[lca].</p>
+                <div class="complexity">
+                    <span class="badge">Preprocess: O(n log n)</span>
+                    <span class="badge">Query: O(log n)</span>
+                </div>
+                <pre><code>int lca(int u, int v) {
+    if(depth[u] &lt; depth[v]) swap(u,v);
+    int diff = depth[u] - depth[v];
+    for(int i = 0; i &lt; LOG; i++)
+        if(diff &amp; (1&lt;&lt;i)) u = up[u][i];
+    if(u == v) return u;
+    for(int i = LOG-1; i &gt;= 0; i--)
+        if(up[u][i] != up[v][i])
+            u = up[u][i], v = up[v][i];
+    return up[u][0];
+}</code></pre>
+            </section>
+
+            <section id="slide-298">
+                <h2><span class="section-num">298</span>Practice: MST Variation</h2>
+                <p>Find Minimum Spanning Tree but you must include a specific edge (u,v). How do you modify Kruskal or Prim to force inclusion? What if that edge creates a cycle with edges already added? Consider impact on MST weight and algorithm correctness. Modify the graph or algorithm to handle constraint.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: Add edge first, then run MST on remaining</strong></p>
+                    <p>Add required edge (u,v) to MST, union u and v in DSU. Then run Kruskal on remaining edges, skipping those that would create cycles. Or set weight of (u,v) to -∞ so Kruskal picks it first, then add actual weight to result. For Prim, start with both u and v in MST. If edge weight is large, MST may be non-optimal but constraint satisfied.</p>
+                </details>
+            </section>
+
+            <section id="slide-299">
+                <h2><span class="section-num">299</span>Practice: Shortest Path Constraint</h2>
+                <p>Find shortest path from A to B with at most K edges. Standard Dijkstra finds path with minimum weight but unrestricted edges. How do you modify to respect edge count limit? Consider dynamic programming approach or modified Bellman-Ford. What is time complexity?</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: Bellman-Ford with K iterations or DP</strong></p>
+                    <p>Use DP: dp[i][v] = shortest path to v using ≤i edges. Recurrence: dp[i][v] = min(dp[i-1][v], min_{u}(dp[i-1][u] + w[u][v])). Run K iterations of Bellman-Ford relaxation. Time O(KE). Alternatively, modified Dijkstra with state (vertex, edges_used) but needs careful handling. This solves shortest path with hop constraint.</p>
+                </details>
+            </section>
+
+            <section id="slide-300">
+                <h2><span class="section-num">300</span>Practice: Graph Modeling</h2>
+                <p>A word ladder problem: transform word "hit" to "cog", changing one letter at a time, each intermediate word must be in dictionary. Find shortest transformation sequence. How do you model this as graph problem? What algorithm solves it and what is complexity?</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: BFS on implicit graph</strong></p>
+                    <p>Model: nodes are words, edge between words differing by one letter. BFS finds shortest path from "hit" to "cog". Don't build full graph: for each word, generate neighbors by changing each character a-z. Time O(N·L·26) where N=words, L=length. Use set for dictionary lookup O(1). BFS ensures minimum transformations. Path reconstruction via parent pointers.</p>
+                </details>
+            </section>
+
+            <section id="slide-301">
+                <h2><span class="section-num">301</span>Grid as Graph</h2>
+                <p>2D grids commonly modeled as graphs where cells are vertices and adjacent cells are edges. 4-directional: up/down/left/right, 8-directional: includes diagonals. BFS gives shortest path in unweighted grid. For weighted cells, use Dijkstra. For A*, Manhattan distance heuristic. Visited array becomes 2D. Boundary checks needed. Grid problems: maze, shortest path, connected components, flood fill.</p>
+                <pre><code>int dr[] = {-1,1,0,0}; // 4-dir
+int dc[] = {0,0,-1,1};
+bool valid(int r, int c, int n, int m) {
+    return r&gt;=0 &amp;&amp; r&lt;n &amp;&amp; c&gt;=0 &amp;&amp; c&lt;m;
+}
+void bfsGrid(int sr, int sc) {
+    queue&lt;pair&lt;int,int&gt;&gt; q;
+    q.push({sr,sc}); vis[sr][sc] = true;
+    while(!q.empty()) {
+        auto [r,c] = q.front(); q.pop();
+        for(int i = 0; i &lt; 4; i++) {
+            int nr = r + dr[i], nc = c + dc[i];
+            if(valid(nr,nc,n,m) &amp;&amp; !vis[nr][nc]) {
+                vis[nr][nc] = true;
+                q.push({nr,nc});
+            }
+        }
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-302">
+                <h2><span class="section-num">302</span>Implicit Graph</h2>
+                <p>Implicit graphs have vertices/edges defined by rules not stored explicitly. Examples: game states, puzzle configurations, mathematical structures. Generate neighbors on-the-fly to save memory. Use BFS/DFS with state encoding and visited set/map. Must ensure state representation is hashable. Common in AI (8-puzzle, chess), code problems (word ladder, sliding puzzle). State space can be huge.</p>
+                <pre><code>// 8-puzzle BFS example
+string start = "123456780";
+queue&lt;string&gt; q; unordered_set&lt;string&gt; vis;
+q.push(start); vis.insert(start);
+while(!q.empty()) {
+    string cur = q.front(); q.pop();
+    if(cur == goal) return dist[cur];
+    int zero = cur.find('0');
+    for(int move : {-3,3,-1,1}) { // up,down,left,right
+        int nxt = zero + move;
+        if(valid(zero, nxt)) {
+            string next = cur;
+            swap(next[zero], next[nxt]);
+            if(!vis.count(next)) {
+                vis.insert(next);
+                q.push(next);
+            }
+        }
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-303">
+                <h2><span class="section-num">303</span>Shortest Path DAG Optimization</h2>
+                <p>In DAGs, topological order allows single pass relaxation for shortest/longest paths in O(V+E). No priority queue needed unlike Dijkstra. Process vertices in topo order, relax all outgoing edges. For longest path, negate weights or use max instead of min. Critical path method in scheduling uses longest path in DAG. Also solves shortest path with negative edges on DAGs.</p>
+                <pre><code>vector&lt;int&gt; topoSort(vector&lt;int&gt; adj[], int n);
+vector&lt;int&gt; dagShortest(int s, vector&lt;pair&lt;int,int&gt;&gt; adj[], int n) {
+    vector&lt;int&gt; order = topoSort(adj, n);
+    vector&lt;int&gt; dist(n, 1e9);
+    dist[s] = 0;
+    for(int u : order) {
+        if(dist[u] != 1e9) {
+            for(auto [v, w] : adj[u]) {
+                dist[v] = min(dist[v], dist[u] + w);
+            }
+        }
+    }
+    return dist;
+}</code></pre>
+            </section>
+
+            <section id="slide-304">
+                <h2><span class="section-num">304</span>Johnson's Algorithm</h2>
+                <p>Johnson's algorithm finds all-pairs shortest paths in sparse graphs with negative edges. Step 1: Add dummy vertex s with 0-weight edges to all vertices, run Bellman-Ford from s to get h[v]. Step 2: Reweight edges w'(u,v) = w(u,v) + h[u] - h[v] ensuring non-negative. Step 3: Run Dijkstra from each vertex O(V·E log V). Total O(VE log V), better than Floyd-Warshall O(V³) for sparse graphs.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(VE log V)</span>
+                    <span class="badge">Handles: Negative edges</span>
+                </div>
+                <pre><code>// 1. Bellman-Ford for h[]
+// 2. Reweight: w' = w + h[u] - h[v]
+// 3. Dijkstra from each vertex
+// 4. Convert distances back: d[u][v] = d'[u][v] - h[u] + h[v]</code></pre>
+            </section>
+
+            <section id="slide-305">
+                <h2><span class="section-num">305</span>Chinese Postman Problem</h2>
+                <p>Find shortest closed walk visiting every edge at least once. If graph has Euler circuit, that is solution. Otherwise, duplicate edges of minimum total weight to make all degrees even. Reduce to minimum weight perfect matching on odd-degree vertices. Compute shortest paths between all odd vertices, find min matching, duplicate those paths. Time O(V³) with Floyd-Warshall + matching.</p>
+                <pre><code>// 1. If all degrees even: Euler circuit
+// 2. Find odd degree vertices
+// 3. Compute all-pairs shortest paths
+// 4. Min weight perfect matching on odd vertices
+// 5. Duplicate matching edges in graph
+// 6. Find Euler circuit in augmented graph</code></pre>
+            </section>
+
+            <section id="slide-306">
+                <h2><span class="section-num">306</span>Traveling Salesman Problem</h2>
+                <p>TSP: find shortest Hamiltonian cycle visiting all vertices exactly once. NP-Hard, no polynomial solution known. DP with bitmask O(n²·2ⁿ): dp[mask][i] = min cost to visit vertices in mask, ending at i. Held-Karp algorithm. Approximation: MST-based 2-approximation for metric TSP. Heuristics: nearest neighbor, Christofides 1.5-approx. Branch and bound for exact solutions.</p>
+                <div class="complexity">
+                    <span class="badge">Exact: O(n²·2ⁿ)</span>
+                    <span class="badge">NP-Hard</span>
+                </div>
+                <pre><code>// DP TSP O(n²2ⁿ)
+vector&lt;vector&lt;int&gt;&gt; dp(1&lt;&lt;n, vector&lt;int&gt;(n, 1e9));
+dp[1][0] = 0;
+for(int mask = 1; mask &lt; (1&lt;&lt;n); mask++) {
+    for(int u = 0; u &lt; n; u++) {
+        if(!(mask &amp; (1&lt;&lt;u))) continue;
+        for(int v = 0; v &lt; n; v++) {
+            if(mask &amp; (1&lt;&lt;v)) continue;
+            dp[mask | (1&lt;&lt;v)][v] = min(dp[mask | (1&lt;&lt;v)][v], 
+                                        dp[mask][u] + dist[u][v]);
+        }
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-307">
+                <h2><span class="section-num">307</span>Graph Coloring Approximation</h2>
+                <p>Graph coloring is NP-Hard but greedy gives (Δ+1)-coloring where Δ is max degree. Brooks' theorem: χ ≤ Δ unless graph is complete or odd cycle, then χ ≤ Δ. Welsh-Powell: sort vertices by degree descending, color greedily. DSATUR uses saturation degree. For planar graphs, 4-color theorem guarantees 4 colors. Bipartite testable in O(V+E). Used in scheduling, register allocation.</p>
+                <pre><code>// DSATUR heuristic
+// saturation[u] = # different colors among neighbors
+// Choose vertex with max saturation, break ties by degree</code></pre>
+            </section>
+
+            <section id="slide-308">
+                <h2><span class="section-num">308</span>Maximum Independent Set</h2>
+                <p>Independent Set: vertices with no edges between them. Maximum IS is NP-Hard. For trees: DP O(n), dp[u][0/1] = max size excluding/including u. For bipartite: König's theorem: |Max Matching| = |Min Vertex Cover|, so |Max IS| = n - |Max Matching|. General graphs: backtracking or approximation. Complement of vertex cover. Used in scheduling, wireless networks.</p>
+                <pre><code>// Tree Maximum Independent Set
+pair&lt;int,int&gt; dfs(int u, int p, vector&lt;int&gt; adj[]) {
+    int excl = 0, incl = 1;
+    for(int v : adj[u]) {
+        if(v == p) continue;
+        auto [e, i] = dfs(v, u, adj);
+        excl += max(e, i);
+        incl += e;
+    }
+    return {excl, incl};
+}
+// answer = max(dfs(root,-1,adj))</code></pre>
+            </section>
+
+            <section id="slide-309">
+                <h2><span class="section-num">309</span>Vertex Cover</h2>
+                <p>Vertex Cover: set of vertices such that each edge has at least one endpoint in set. Minimum VC is NP-Hard. For bipartite graphs: König's theorem reduces to max matching. For trees: greedy or DP. 2-approximation: pick any edge, add both endpoints, remove incident edges, repeat. Complement of independent set. VC + IS = V for any graph. Used in network monitoring.</p>
+                <pre><code>// 2-approximation for vertex cover
+unordered_set&lt;int&gt; vc;
+for(auto [u,v] : edges) {
+    if(!vc.count(u) &amp;&amp; !vc.count(v)) {
+        vc.insert(u);
+        vc.insert(v);
+    }
+}</code></pre>
+            </section>
+
+            <section id="slide-310">
+                <h2><span class="section-num">310</span>Dominator Tree</h2>
+                <p>In directed graph with start node, vertex v dominates vertex w if all paths from start to w go through v. Dominator tree represents immediate dominator relation. Used in compiler optimization for control flow. Lengauer-Tarjan algorithm O(E·α(V)) computes in near-linear time. Root is start node, each node's parent is its immediate dominator. Essential for code optimization, dead code elimination.</p>
+                <pre><code>// Applications: loop detection, SSA form
+// v dominates w if v appears on every path start→w
+// Immediate dominator is closest dominator</code></pre>
+            </section>
+
+            <section id="slide-311">
+                <h2><span class="section-num">311</span>Practice: Algorithm Selection</h2>
+                <p>Given a social network where you need to find: 1) If two users are connected, 2) Shortest connection chain, 3) All users within 3 degrees. Data: 1 billion users, average 200 friends each. Graph is sparse, unweighted, undirected. Which algorithms and data structures? Consider memory and time constraints.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: BFS with adjacency list, possibly bidirectional</strong></p>
+                    <p>Use adjacency list O(V+E) = 1B + 200B = 201B edges, stored on disk/distributed. BFS for shortest path O(V+E) but may be too slow. Bidirectional BFS halves depth. For connectivity, use DSU offline. For distance ≤3, BFS with depth limit. Memory: don't load full graph, use external memory or graph database. Approximate with sketching algorithms for huge scale.</p>
+                </details>
+            </section>
+
+            <section id="slide-312">
+                <h2><span class="section-num">312</span>Practice: Cycle Handling</h2>
+                <p>You're implementing a package manager. Packages depend on other packages. Installing a package installs all dependencies. If A depends on B and B depends on A, it's a circular dependency error. How do you detect this and find all packages in cycles? What about finding safe installation order?</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: Cycle detection + Topo sort or SCC</strong></p>
+                    <p>Model as directed graph. Run DFS with three colors to detect cycles and report error. Or find SCCs using Tarjan/Kosaraju - packages in same SCC are mutually dependent. For valid install order, use topological sort if no cycles. If cycles exist, condensation DAG of SCCs can be topologically sorted, but packages within SCC must be installed together or error.</p>
+                </details>
+            </section>
+
+            <section id="slide-313">
+                <h2><span class="section-num">313</span>Practice: Network Design</h2>
+                <p>Design a computer network connecting 100 buildings. You have costs for laying cables between any two buildings. Some connections are required for redundancy. Find minimum cost network where all buildings connected and specific critical connections exist. Graph may not be complete. What algorithm handles required edges?</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: Constrained MST</strong></p>
+                    <p>First add all required edges. Check if they form cycles - if so, impossible. Contract each connected component from required edges into single vertex. Run MST on contracted graph to connect components. Or modify Kruskal: start with required edges in DSU, then continue. Total cost = sum required + MST of contracted graph. If required edges form forest, this works.</p>
+                </details>
+            </section>
+
+            <section id="slide-314">
+                <h2><span class="section-num">314</span>Practice: Flow Application</h2>
+                <p>A school needs to assign students to projects. Each student ranks 3 preferred projects. Each project has capacity. Find maximum number of students who get a preferred project. How do you model as graph problem? Which algorithm solves it optimally?</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: Max Flow or Max Bipartite Matching</strong></p>
+                    <p>Model as bipartite graph: left = students, right = projects. Edge from student to each preferred project, capacity 1. Add source to all students (capacity 1), all projects to sink (capacity = project capacity). Max flow gives maximum matching. Or use Hopcroft-Karp O(E√V). This ensures capacity constraints and preference constraints satisfied, maximizing assignments.</p>
+                </details>
+            </section>
+
+            <section id="slide-315">
+                <h2><span class="section-num">315</span>Practice: Path Reconstruction</h2>
+                <p>After running Dijkstra, you have distance array but need actual shortest path from source to target. How do you reconstruct it? What if you need all shortest paths or count of shortest paths? Modify Dijkstra to store predecessors. Consider non-unique shortest paths.</p>
+                <details>
+                    <summary>Reveal Answer</summary>
+                    <p><strong>Answer: Store parent array during relaxation</strong></p>
+                    <p>Maintain parent[v] = u when dist[v] updated via u. Reconstruct by following parents from target to source, then reverse. For counting paths: use DP, count[v] = sum of count[u] for all u where dist[v] = dist[u] + w(u,v). For all paths, store list of parents instead of single parent. Modify relaxation: if equal distance found, add to parent list.</p>
+                </details>
+            </section>
+
+            <section id="slide-316">
+                <h2><span class="section-num">316</span>Topological Sort Applications</h2>
+                <p>Topological Sort orders vertices in DAG respecting dependencies. Applications: task scheduling with prerequisites, build systems (make, ninja), course scheduling, spreadsheet formula evaluation, package installation order. Detects cycles if sort fails. For multiple valid orders, all are correct. Kahn's algorithm naturally gives order and detects cycles. DFS post-order reversal also works.</p>
+                <p>Beyond basic topo sort: longest path in DAG O(V+E) for critical path analysis, shortest path in DAG O(V+E) even with negative edges, counting paths from source to target, DP on DAGs.</p>
+                <div class="complexity">
+                    <span class="badge">Time: O(V+E)</span>
+                    <span class="badge">Space: O(V)</span>
+                    <span class="badge">Req: DAG</span>
+                </div>
+                <pre><code>// Example: Build order for projects with dependencies
+// Projects: A, B(A), C(A), D(B,C)
+// Topo order: A, B, C, D or A, C, B, D
+// Both valid - B and C can be built in parallel after A</code></pre>
+            </section>
+
+        </main>
+    </div>
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
